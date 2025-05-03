@@ -1,0 +1,49 @@
+import React from "react";
+import { CHIP_STYLE } from "../../../constant/Candidate/Chip";
+import bookmarker from "../../../assets/icons/bookmarker.svg";
+
+export const SubPolicy = ({ policy }) => {
+  return (
+    <div className="pb-5">
+      {/* Sub policy contents */}
+      <div className="flex flex-col space-y-2 w-full border-b-gray-500 border-1">
+        {/* Sub policy card */}
+        {policy?.map((policy, idx) => (
+          <div
+            key={idx}
+            className="relative flex flex-col justify-center w-full min-h-[134px] rounded-xl border-2 border-gray-200 p-3"
+          >
+            {/* bookmark button */}
+            <img
+              src={bookmarker}
+              alt="bookmarker"
+              width={30}
+              className="absolute top-3 right-3"
+            />
+            {/* policy tag */}
+            <div className="flex flex-row gap-x-2 pb-2">
+              {policy.prop?.map((tag) => (
+                <div
+                  className={`text-[14px] px-[8px] py-[1.5px] rounded-lg ${
+                    CHIP_STYLE[tag] || "bg-blue-500 text-white"
+                  }`}
+                >
+                  {tag}
+                </div>
+              ))}
+            </div>
+
+            {/* policy content */}
+            <div className="text-[16px]">{policy.title}</div>
+            <div className="text-[14px] whitespace-pre-line">
+              {policy.content}
+            </div>
+            <div className="text-[14px] text-blue-500 pt-2">상세보기 &gt;</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default SubPolicy;

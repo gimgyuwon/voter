@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(255, 255, 255);
+  max-width: 500px;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 16px;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: white;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px);
+  width: 100%;
+  padding: 1rem 1.5rem 75px 1.5rem;
+  overflow-x: auto;
+}
+
+.footer {
+  max-width: 500px;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid #e5e7eb;
+  padding: 1rem 0rem 0.7rem 0rem;
+  background-color: white;
+}
+
+input[type="range"] {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+hr {
+  width: 100%;
+  border: none;
+  border-top: 0.1rem solid #303030;
+  margin-top: 2rem;
+}
+
+.selected {
+  background-color: #303030;
+  color: white;
+}
+
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .question p {
+    font-size: 0.95rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+}

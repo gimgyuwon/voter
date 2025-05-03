@@ -1,0 +1,43 @@
+import { Routes, Route } from "react-router-dom";
+import HomePage from "../pages/HomePage";
+import QuestionPage from "../pages/QuestionPage";
+import ResultPage from "../pages/ResultPage";
+import ComparePage from "../pages/Compare/ComparePage";
+import CheerPage from "../pages/Cheer/CheerPage";
+import SettingPage from "../pages/Setting/SettingPage";
+import CandidatePage from "../pages/Candidate/CandidatePage";
+import Jaemyeong from "../pages/Candidate/Jaemyeong/Jaemyeong";
+import Donghoon from "../pages/Candidate/Donghoon/Donghoon";
+import Junseok from "../pages/Candidate/Junseok/Junseok";
+import Jaeyeon from "../pages/Candidate/Jaeyeon/Jaeyeon";
+import Nakyeon from "../pages/Candidate/Nakyeon/Nakyeon";
+import KakaoRedirectPage from "../pages/KakaoRedirectPage";
+
+const AppRouter = () => {
+  return (
+    <div className="container">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/question" element={<QuestionPage />} />
+        <Route path="/result" element={<ResultPage />} />
+        <Route path="/compare" element={<ComparePage />} />
+        <Route path="/cheer" element={<CheerPage />} />
+        <Route path="/setting" element={<SettingPage />} />
+
+        {/* Oauth routes form kakao login */}
+        <Route path="/oauth/kakao/callback" element={<KakaoRedirectPage />} />
+
+        {/* Nested routes for /candidate */}
+        <Route path="/candidate" element={<CandidatePage />}>
+          <Route path="jaemyeong" element={<Jaemyeong />} />
+          <Route path="donghoon" element={<Donghoon />} />
+          <Route path="junseok" element={<Junseok />} />
+          <Route path="jaeyeon" element={<Jaeyeon />} />
+          <Route path="nakyeon" element={<Nakyeon />} />
+        </Route>
+      </Routes>
+    </div>
+  );
+};
+
+export default AppRouter;

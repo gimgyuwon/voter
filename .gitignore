@@ -1,0 +1,22 @@
+# Ignore virtual environment
+venv/
+ENV/
+env/
+.venv/
+.Python
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python backup files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.log
+
+# dotenv
+.env

@@ -1,0 +1,19 @@
+# Python bytecode
+*.py[cod]
+__pycache__/
+
+# Django-specific
+*.log
+*.pot
+*.pyc
+*.sqlite3
+*.db
+local_settings.py
+
+# dotenv
+.env
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
