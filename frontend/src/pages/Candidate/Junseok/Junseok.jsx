@@ -13,9 +13,7 @@ export const Junseok = () => {
     (item) => item.candidate === "이준석"
   );
 
-  const mainPolicy = junseokPolicy.filter(
-    (item) => item.candidate === item.main
-  );
+  const mainPolicy = junseokPolicy.filter((item) => item.main);
 
   const subPolicy =
     selectedTag === "전체"
