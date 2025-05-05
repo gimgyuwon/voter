@@ -1,8 +1,11 @@
 import React from "react";
-import { CHIP_STYLE } from "../../../constant/Candidate/Chip";
+import {
+  CHIP_STYLE,
+  CANDIDATE_CHIP_STYLE,
+} from "../../../constant/Candidate/Chip";
 import bookmarker from "../../../assets/icons/bookmarker.svg";
 
-export const SubPolicy = ({ policy }) => {
+export const SubPolicy = ({ policy, compare = false }) => {
   return (
     <div className="pb-5">
       {/* Sub policy contents */}
@@ -31,6 +34,16 @@ export const SubPolicy = ({ policy }) => {
                   {tag}
                 </div>
               ))}
+              {compare && (
+                <div
+                  className={`text-[14px] px-[8px] py-[1.5px] rounded-lg font-semibold text-white ${
+                    CANDIDATE_CHIP_STYLE[policy?.candidate] ||
+                    "bg-blue-500 text-white"
+                  }`}
+                >
+                  {policy?.candidate}
+                </div>
+              )}
             </div>
 
             {/* policy content */}

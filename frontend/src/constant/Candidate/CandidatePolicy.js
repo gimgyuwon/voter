@@ -1,15 +1,17 @@
-export const JUNSEOK_POLICY = [
+export const CANDIDATE_POLICY = [
   {
     title: "정부 부처 통합 및 3부총리제",
     content: "19개 부처 → 13개 부처로 통폐합. \n행정 효율성 극대화",
     main: true,
     prop: ["행정"],
+    candidate: "이준석",
   },
   {
     title: "국민연금 이원화 개혁",
     content: "신·구 연금 분리로 세대 갈등 완화 및 재정 안정화",
     prop: ["복지", "경제", "2030"],
     main: true,
+    candidate: "이준석",
   },
   {
     title: "현역 대상 장교 선발제도 도입",
@@ -17,12 +19,14 @@ export const JUNSEOK_POLICY = [
       "기초군사훈련 성적 우수자를 장교·부사관으로 선발. \n해당 복무자에게 대학 등록금 전액 지원",
     prop: ["국방", "2030"],
     main: false,
+    candidate: "이준석",
   },
   {
     title: "지자체별 최저임금 자율제",
     content: "최저임금을 지역 여건에 따라 ±30% 내 자율 결정",
     prop: ["경제", "2030"],
     main: false,
+    candidate: "이준석",
   },
   {
     title: "해외 공장 이전 기업 국내 산업 단지 복귀 지원",
@@ -30,18 +34,21 @@ export const JUNSEOK_POLICY = [
       "영호남 러스트 벨트 지역 경제 소생 및 제조업 기반 복원 \n* (포항/울산/여수/창원/구미)",
     prop: ["경제", "기술", "2030", "4050"],
     main: false,
+    candidate: "이준석",
   },
   {
     title: "법인지방소득세 확대 및 지자체 세율 결정권",
     content: "지방소득세 비중 10% → 30%로 확대. \n각 지자체가 세율 결정",
     prop: ["경제", "4050"],
     main: false,
+    candidate: "이준석",
   },
   {
     title: "교권 및 수업권 보호",
     content: "무고죄 처벌 강화, 교사 소송 국가 책임제 도입",
     prop: ["교육", "청소년", "2030", "4050"],
     main: false,
+    candidate: "이준석",
   },
   {
     title: "고졸 이하 청년 대상 '든든출발자금' 지원",
@@ -49,20 +56,41 @@ export const JUNSEOK_POLICY = [
       "고졸 이하 청년 대상 (만 19~34세) \n연 1.7% 금리로 분기 당 500만원씩 총 10회 지원",
     prop: ["복지", "2030"],
     main: false,
+    candidate: "이준석",
   },
-];
-
-export const JAEMYEONG_POLICY = [
   {
     title: "청년 주거 안정 지원 확대",
     content: "신혼부부·청년 맞춤형 주택 20만호 공급",
     prop: ["주택", "2030"],
     main: true,
+    candidate: "이재명",
   },
   {
     title: "청년 주거 안정 지원 확대",
     content: "신혼부부·청년 맞춤형 주택 20만호 공급",
     prop: ["주택", "2030"],
     main: false,
+    candidate: "이재명",
+  },
+  {
+    title: "청년 주거 안정 지원 확대",
+    content: "신혼부부·청년 맞춤형 주택 20만호 공급",
+    prop: ["주택", "2030"],
+    main: false,
+    candidate: "김재연",
+  },
+  {
+    title: "청년 주거 안정 지원 확대",
+    content: "신혼부부·청년 맞춤형 주택 20만호 공급",
+    prop: ["주택", "2030"],
+    main: false,
+    candidate: "이낙연",
+  },
+  {
+    title: "청년 주거 안정 지원 확대",
+    content: "신혼부부·청년 맞춤형 주택 20만호 공급",
+    prop: ["주택", "2030"],
+    main: false,
+    candidate: "김문수",
   },
 ];

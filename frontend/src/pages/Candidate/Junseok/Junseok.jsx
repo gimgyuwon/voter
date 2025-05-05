@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import junseok from "../../../assets/images/junseok.png";
 import MainPolicy from "../../../components/Candidate/Common/MainPolicy";
-import { JUNSEOK_POLICY } from "../../../constant/Candidate/CandidatePolicy";
+import { CANDIDATE_POLICY } from "../../../constant/Candidate/CandidatePolicy";
 import Chip from "../../../components/Common/Chip/Chip";
 import SubPolicy from "../../../components/Candidate/Common/SubPolicy";
 import whiteLove from "../../../assets/icons/whiteLove.svg";
@@ -9,12 +9,18 @@ import whiteLove from "../../../assets/icons/whiteLove.svg";
 export const Junseok = () => {
   const [selectedTag, setSelectedTag] = useState("전체");
 
-  const mainPolicy = JUNSEOK_POLICY.filter((item) => item.main);
+  const junseokPolicy = CANDIDATE_POLICY.filter(
+    (item) => item.candidate === " junseok"
+  );
+
+  const mainPolicy = junseokPolicy.filter(
+    (item) => item.candidate === item.main
+  );
 
   const subPolicy =
     selectedTag === "전체"
-      ? JUNSEOK_POLICY
-      : JUNSEOK_POLICY.filter((item) => item.prop?.includes(selectedTag));
+      ? junseokPolicy
+      : junseokPolicy.filter((item) => item.prop?.includes(selectedTag));
 
   return (
     <>

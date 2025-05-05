@@ -18,8 +18,8 @@ export const CANDIDATE_OPTION = [
     squareImg: jaemyeongSquare,
   },
   {
-    value: "한동훈",
-    label: "한동훈",
+    value: "김문수",
+    label: "김문수",
     party: "국민의힘",
     color: "#E61E2B",
     link: "/candidate/donghoon",

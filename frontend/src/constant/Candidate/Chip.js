@@ -27,3 +27,11 @@ export const CHIP_STYLE = {
   국방: "bg-violet-200 text-black",
   행정: "bg-rose-200 text-black",
 };
+
+export const CANDIDATE_CHIP_STYLE = {
+  이재명: "bg-[#152484]",
+  김문수: "bg-[#E61E2B]",
+  이준석: "bg-[#FF7210]",
+  김재연: "bg-[#D6001C]",
+  이낙연: "bg-[#51BDC5]",
+};
