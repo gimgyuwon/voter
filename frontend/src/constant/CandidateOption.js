@@ -1,11 +1,13 @@
 import jaemyeong from "../assets/images/jaemyeong.png";
-import donghoon from "../assets/images/donghoon.png";
+import munsu from "../assets/images/munsu.png";
 import jaeyeon from "../assets/images/jaeyeon.png";
 import junseok from "../assets/images/junseok.png";
 import nakyeon from "../assets/images/nakyeon.png";
 import jaemyeongSquare from "../assets/images/jaemyeongSquare.png";
 import jaeyeonSquare from "../assets/images/jaeyeonSquare.png";
 import junseokSquare from "../assets/images/junseokSquare.png";
+import nakyeonSquare from "../assets/images/nakyeonSquare.png";
+import munsuSquare from "../assets/images/munsuSquare.png";
 
 export const CANDIDATE_OPTION = [
   {
@@ -22,8 +24,9 @@ export const CANDIDATE_OPTION = [
     label: "김문수",
     party: "국민의힘",
     color: "#E61E2B",
-    link: "/candidate/donghoon",
-    image: donghoon,
+    link: "/candidate/munsu",
+    image: munsu,
+    squareImg: munsuSquare,
   },
   {
     value: "이준석",
@@ -50,6 +53,7 @@ export const CANDIDATE_OPTION = [
     color: "#51BDC5",
     link: "/candidate/nakyeon",
     image: nakyeon,
+    squareImg: nakyeonSquare,
   },
 ];
 

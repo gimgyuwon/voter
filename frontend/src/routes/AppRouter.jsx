@@ -7,7 +7,7 @@ import CheerPage from "../pages/Cheer/CheerPage";
 import SettingPage from "../pages/Setting/SettingPage";
 import CandidatePage from "../pages/Candidate/CandidatePage";
 import Jaemyeong from "../pages/Candidate/Jaemyeong/Jaemyeong";
-import Donghoon from "../pages/Candidate/Donghoon/Donghoon";
+import Munsu from "../pages/Candidate/Munsu/Munsu";
 import Junseok from "../pages/Candidate/Junseok/Junseok";
 import Jaeyeon from "../pages/Candidate/Jaeyeon/Jaeyeon";
 import Nakyeon from "../pages/Candidate/Nakyeon/Nakyeon";
@@ -30,7 +30,7 @@ const AppRouter = () => {
         {/* Nested routes for /candidate */}
         <Route path="/candidate" element={<CandidatePage />}>
           <Route path="jaemyeong" element={<Jaemyeong />} />
-          <Route path="donghoon" element={<Donghoon />} />
+          <Route path="munsu" element={<Munsu />} />
           <Route path="junseok" element={<Junseok />} />
           <Route path="jaeyeon" element={<Jaeyeon />} />
           <Route path="nakyeon" element={<Nakyeon />} />

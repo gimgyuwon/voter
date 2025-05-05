@@ -1,6 +1,6 @@
 import ComingSoon from "../../../components/Common/ComingSoon";
 
-export const Donghoon = () => {
+export const Munsu = () => {
   return (
     <>
       <div className="flex"></div>
@@ -9,4 +9,4 @@ export const Donghoon = () => {
   );
 };
 
-export default Donghoon;
+export default Munsu;

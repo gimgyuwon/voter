@@ -1,16 +1,9 @@
 import React from "react";
 import pinkLove from "../../assets/icons/pinkLove.svg";
 import whiteLove from "../../assets/icons/whiteLove.svg";
+import RANK_COLOR from "../../constant/RankingColor";
 
 export const Ranking = ({ rankingList }) => {
-  const rankColor = (rank) => {
-    return rank === 1
-      ? "bg-yellow-400"
-      : rank === 2
-      ? "bg-gray-400"
-      : "bg-orange-400";
-  };
-
   return (
     <div className="pb-5 space-y-6">
       {/* Ranking Title */}
@@ -26,9 +19,9 @@ export const Ranking = ({ rankingList }) => {
 
           {/* Rank badge */}
           <div
-            className={`absolute -top-1.5 -left-3.5 w-8 h-8 rounded-full flex items-center justify-center text-center font-semibold text-white ${rankColor(
-              parseInt(rank)
-            )}`}
+            className={`absolute -top-1.5 -left-3.5 w-8 h-8 rounded-full flex items-center justify-center text-center font-semibold text-white ${
+              RANK_COLOR?.[parseInt(rank)]
+            }`}
           >
             {rank}
           </div>

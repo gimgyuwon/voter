@@ -6,8 +6,10 @@ export const CheerPage = () => {
   // Dummy ranking
   const rankingList = {
     1: CANDIDATE_OPTION[0],
-    2: CANDIDATE_OPTION[2],
-    3: CANDIDATE_OPTION[3],
+    2: CANDIDATE_OPTION[1],
+    3: CANDIDATE_OPTION[2],
+    4: CANDIDATE_OPTION[3],
+    5: CANDIDATE_OPTION[4],
   };
 
   return (
