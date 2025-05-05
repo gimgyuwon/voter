@@ -10,7 +10,7 @@ export const Junseok = () => {
   const [selectedTag, setSelectedTag] = useState("전체");
 
   const junseokPolicy = CANDIDATE_POLICY.filter(
-    (item) => item.candidate === " junseok"
+    (item) => item.candidate === "이준석"
   );
 
   const mainPolicy = junseokPolicy.filter(

@@ -1,10 +1,15 @@
 import Select from "react-select";
 import CANDIDATE_OPTION from "../../../../constant/CandidateOption";
 import { CustomOption, CustomSingleValue, CustomStyle } from "./CustomOption";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const CandidateSelect = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const selectedOption =
+    CANDIDATE_OPTION?.find((option) => option?.link === location.pathname) ||
+    null;
+
   const handleChange = (selectOption) => {
     if (selectOption?.link) {
       navigate(selectOption.link);
@@ -22,6 +27,7 @@ export const CandidateSelect = () => {
         SingleValue: CustomSingleValue,
       }}
       menuPortalTarget={document.body}
+      value={selectedOption}
       onChange={handleChange}
     />
   );

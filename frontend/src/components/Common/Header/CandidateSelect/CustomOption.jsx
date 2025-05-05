@@ -36,5 +36,7 @@ export const CustomStyle = {
     width: "100%",
     left: "50%",
     transform: "translateX(-50%)",
+    fontWeight: 500,
+    paddingLeft: "0.5rem",
   }),
 };
