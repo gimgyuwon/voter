@@ -9,7 +9,7 @@ export const PolicyTest = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center bg-[#EFF6FF] h-[172px] py-3 px-5 space-y-2 rounded-xl">
+    <div className="flex flex-col justify-center bg-main-300 h-[172px] py-3 px-5 space-y-2 rounded-xl">
       <div className="flex flex-row space-x-3 items-center">
         <img src={testRobot} alt="testRobot" width={30} height={24} />
         <div className="pt-1 text-[18px]">나의 성향 분석</div>
@@ -19,7 +19,7 @@ export const PolicyTest = () => {
       </div>
       <button
         onClick={handleClick}
-        className="w-full min-h-[44px] bg-blue-500 rounded-xl text-white"
+        className="w-full min-h-[44px] bg-main-500 rounded-xl text-white"
       >
         시작하기
       </button>

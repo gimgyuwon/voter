@@ -28,7 +28,7 @@ export const SubPolicy = ({ policy, compare = false }) => {
               {policy.prop?.map((tag) => (
                 <div
                   className={`text-[14px] px-[8px] py-[1.5px] rounded-lg ${
-                    CHIP_STYLE[tag] || "bg-blue-500 text-white"
+                    CHIP_STYLE[tag] || "bg-main-500 text-white"
                   }`}
                 >
                   {tag}
@@ -38,7 +38,7 @@ export const SubPolicy = ({ policy, compare = false }) => {
                 <div
                   className={`text-[14px] px-[8px] py-[1.5px] rounded-lg font-semibold text-white ${
                     CANDIDATE_CHIP_STYLE[policy?.candidate] ||
-                    "bg-blue-500 text-white"
+                    "bg-main-500 text-white"
                   }`}
                 >
                   {policy?.candidate}

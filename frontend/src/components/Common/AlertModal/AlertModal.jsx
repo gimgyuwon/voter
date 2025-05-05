@@ -10,7 +10,7 @@ export const AlertModal = ({ message, onClose }) => {
         <div className="w-full"></div>
         <button
           onClick={onClose}
-          className="w-full justify-center mt-2 px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600"
+          className="w-full justify-center mt-2 px-4 py-2 bg-main-500 text-white rounded-xl"
         >
           확인
         </button>

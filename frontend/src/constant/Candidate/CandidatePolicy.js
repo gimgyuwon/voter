@@ -93,4 +93,11 @@ export const CANDIDATE_POLICY = [
     main: false,
     candidate: "김문수",
   },
+  {
+    title: "청년 주거 안정 지원 확대",
+    content: "신혼부부·청년 맞춤형 주택 20만호 공급",
+    prop: ["주택", "60+"],
+    main: false,
+    candidate: "김문수",
+  },
 ];

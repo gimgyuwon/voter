@@ -58,7 +58,7 @@ export const Question = ({ onSubmit }) => {
               onClick={() => handleChange(currentQuestion.key, value)}
               className={`w-full px-4 py-2 rounded-xl ${
                 answers[currentQuestion.key] === value
-                  ? "bg-blue-100 text-black border-[1.5px] border-blue-500"
+                  ? "bg-main-100 text-black border-[1.5px] border-main-500"
                   : "bg-white text-gray-700 border-[1.5px] border-gray-200"
               }`}
             >
@@ -71,7 +71,7 @@ export const Question = ({ onSubmit }) => {
           {currentIndex > 0 && (
             <button
               onClick={handlePrev}
-              className="w-full px-4 py-2 bg-white border-2 border-blue-500 text-blue-500 rounded-xl"
+              className="w-full px-4 py-2 bg-white border-2 border-main-500 text-main-500 rounded-xl"
             >
               이전
             </button>
@@ -80,14 +80,14 @@ export const Question = ({ onSubmit }) => {
           {currentIndex < QUESTION_LIST.length - 1 ? (
             <button
               onClick={handleNext}
-              className="w-full px-4 py-2 bg-blue-500 text-white rounded-xl"
+              className="w-full px-4 py-2 bg-main-500 text-white rounded-xl"
             >
               다음
             </button>
           ) : (
             <button
               onClick={handleSubmit}
-              className="w-full px-4 py-2 bg-blue-500 text-white rounded-xl"
+              className="w-full px-4 py-2 bg-main-500 text-white rounded-xl"
             >
               결과 보기
             </button>

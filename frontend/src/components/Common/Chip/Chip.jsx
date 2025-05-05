@@ -9,7 +9,7 @@ export const Chip = ({ select, onSelect }) => {
           key={gen}
           className={`flex justify-center items-center w-fit h-[36px] p-3 rounded-3xl ${
             select === gen
-              ? "bg-blue-500 text-white"
+              ? "bg-main-500 text-white"
               : "bg-gray-200 text-gray-700"
           }`}
           onClick={() => onSelect(gen)}

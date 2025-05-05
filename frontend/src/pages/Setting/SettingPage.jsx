@@ -9,7 +9,7 @@ export const SettingPage = () => {
   return (
     <>
       <button
-        className="bg-blue-500 p-4 rounded-xl text-white font-semibold"
+        className="bg-main-500 p-4 rounded-xl text-white font-semibold"
         onClick={handleLoginClick}
       >
         로그인
