@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../store/useAuthStore";
 import axios from "axios";
 
 export const KakaoRedirectPage = () => {
+  const { login } = useAuthStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,8 +16,16 @@ export const KakaoRedirectPage = () => {
           `${process.env.REACT_APP_API_URL}/api/auth/kakao`,
           { code }
         );
-        localStorage.setItem("access_token", res.data.access_token);
-        localStorage.setItem("nickname", res.data.nickname);
+
+        const { access_token, nickname } = res.data;
+
+        // LocalStorage
+        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("nickname", nickname);
+
+        // Zustand
+        login({ nickname }, access_token);
+
         navigate("/");
       } catch (e) {
         console.error(e);
@@ -26,7 +36,7 @@ export const KakaoRedirectPage = () => {
       fetchToken();
       window.history.replaceState({}, document.title, "/");
     }
-  }, []);
+  }, [navigate, login]);
 
   return null;
 };
