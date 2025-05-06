@@ -10,5 +10,7 @@ class User(AbstractUser):
     ideology = models.CharField(max_length=20, null=True, blank=True)
     policy_match = models.CharField(max_length=50, null=True, blank=True)
 
+    REQUIRED_FIELDS = []
+
     def __str__(self):
         return self.nickname

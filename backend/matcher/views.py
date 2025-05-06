@@ -49,7 +49,7 @@ def kakao_login(request):
     nickname = user_info.get("kakao_account", {}).get("profile", {}).get("nickname")
 
     # 기존 사용자 확인 or 새로 생성
-    user, _ = User.objects.get_or_create(kakao_id=kakao_id, defaults={'nickname': nickname})
+    user, _ = User.objects.get_or_create(kakao_id=kakao_id, defaults={'nickname': nickname, 'username': f'kakao_{kakao_id}'})
     tokens = get_tokens_for_user(user)
 
     return Response({
