@@ -20,50 +20,64 @@ def get_tokens_for_user(user):
 @api_view(['POST'])
 def kakao_login(request):
     code = request.data.get('code')
-    print("code:", code)
     if not code:
         return Response({'error': 'No code provided'}, status=400)
+
+    try:
+        # 카카오 토큰 요청
+        token_res = requests.post('https://kauth.kakao.com/oauth/token', data={
+            'grant_type': 'authorization_code',
+            'client_id': settings.KAKAO_CLIENT_ID,
+            'redirect_uri': settings.KAKAO_REDIRECT_URI,
+            'code': code,
+            'client_secret': settings.KAKAO_SECRET_CODE
+        })
+
+        token_res.raise_for_status()
+        access_token = token_res.json().get('access_token')
+        if not access_token:
+            return Response({'error': 'Failed to get access token'}, status=400)
+
+        # 사용자 정보 요청
+        user_info_res = requests.get(
+            'https://kapi.kakao.com/v2/user/me',
+            headers={'Authorization': f'Bearer {access_token}'}
+        )
+        user_info_res.raise_for_status()
+        user_info = user_info_res.json()
+
+        kakao_id = user_info.get('id')
+        nickname = user_info.get("kakao_account", {}).get("profile", {}).get("nickname")
+
+        if not kakao_id or not nickname:
+            return Response({'error': 'Invalid user info from Kakao'}, status=400)
+
+        user, created = User.objects.get_or_create(
+            kakao_id=kakao_id,
+            defaults={
+                'nickname': nickname,
+                'username': f'kakao_{kakao_id}'
+            }
+        )
+
+        if not created and not user.username:
+            user.username = f'kakao_{kakao_id}'
+            user.save()
+
+        tokens = get_tokens_for_user(user)
+
+        return Response({
+            'access_token': tokens['access'],
+            'refresh_token': tokens['refresh'],
+            'nickname': user.nickname,
+            'ideology': user.ideology,
+            'policyMatch': user.policy_match,
+        })
     
-    # 카카오 토큰 요청
-    token_url = 'https://kauth.kakao.com/oauth/token'
-    token_data = {
-        'grant_type': 'authorization_code',
-        'client_id': settings.KAKAO_CLIENT_ID,
-        'redirect_uri': settings.KAKAO_REDIRECT_URI,
-        'code': code,
-        'client_secret': settings.KAKAO_SECRET_CODE
-    }
-
-    token_res = requests.post(token_url, data=token_data)
-    print("token status:", token_res.status_code)
-    print("token response:", token_res.text)
-    token_json = token_res.json()
-    access_token = token_json.get('access_token')
-    if not access_token:
-        return Response({'error': 'Failed to get token'}, status=400)
-    
-    # 토큰으로 사용자 정보 요청
-    user_info_url = 'https://kapi.kakao.com/v2/user/me'
-    headers = {'Authorization': f'Bearer {access_token}'}
-    user_info_res = requests.get(user_info_url, headers=headers)
-    user_info = user_info_res.json()
-    print("user info status:", user_info_res.status_code)
-    print("user info:", user_info_res.text)
-
-    kakao_id = user_info.get('id')
-    nickname = user_info.get("kakao_account", {}).get("profile", {}).get("nickname")
-
-    # 기존 사용자 확인 or 새로 생성
-    user, _ = User.objects.get_or_create(kakao_id=kakao_id, defaults={'nickname': nickname, 'username': f'kakao_{kakao_id}'})
-    tokens = get_tokens_for_user(user)
-
-    return Response({
-        'access_token': tokens['access'],
-        'refresh_token': tokens['refresh'],
-        'nickname': user.nickname,
-        'ideology': user.ideology,
-        'policyMatch': user.policy_match,
-    })
+    except requests.exceptions.RequestException as e:
+        return Response({'error': 'Kakao API request failed', 'detail': str(e)}, status=500)
+    except Exception as e:
+        return Response({'error': 'Server error', 'detail': str(e)}, status=500)
 
 @api_view(['POST'])
 def calculate_match(request):
