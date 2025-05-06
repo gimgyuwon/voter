@@ -7,7 +7,7 @@ const useAuthStore = create((set) => ({
   testResult: null,
 
   /** 로그인 처리 */
-  login: ({ user, token, testResult }) =>
+  login: ({ user, token, testResult, bookmarks = [] }) =>
     set({
       user,
       accessToken: token,

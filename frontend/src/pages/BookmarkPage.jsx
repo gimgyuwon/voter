@@ -10,6 +10,7 @@ import Chip from "../components/Common/Chip/Chip";
 export const BookmarkPage = () => {
   const navigate = useNavigate();
   const { user, bookmarks } = useAuthStore();
+  // !user 로 변경 필요
   const [alertOpen, setAlertOpen] = useState(!!user);
   const [selectedTag, setSelectedTag] = useState("전체");
 
@@ -21,10 +22,14 @@ export const BookmarkPage = () => {
     navigate("/");
   };
 
+  const bookmarkPolicy = CANDIDATE_POLICY.filter((policy) =>
+    bookmarks.includes(policy.id)
+  );
+
   const subPolicy =
     selectedTag === "전체"
-      ? CANDIDATE_POLICY
-      : CANDIDATE_POLICY.filter((item) => item.prop?.includes(selectedTag));
+      ? bookmarkPolicy
+      : bookmarkPolicy.filter((item) => item.prop?.includes(selectedTag));
 
   if (alertOpen) {
     return (
@@ -44,10 +49,7 @@ export const BookmarkPage = () => {
         북마크한 공약 {bookmarks.length || 0}개
       </div>
       <Chip select={selectedTag} onSelect={setSelectedTag} />
-      <SubPolicy
-        policy={bookmarks.length ? bookmarks : subPolicy}
-        compare={true}
-      />
+      <SubPolicy policy={subPolicy} compare={true} />
     </div>
   );
 };

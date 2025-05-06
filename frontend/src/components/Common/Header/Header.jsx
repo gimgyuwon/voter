@@ -24,8 +24,8 @@ export const Header = () => {
             <img
               src={bookmarker}
               alt="bookmarker"
-              width={30}
-              height={30}
+              width={13}
+              height={13}
               onClick={() => handleBookmarkClick()}
             />
             <img src={darkMode} alt="darkMode" width={30} height={30} />
