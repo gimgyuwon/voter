@@ -6,19 +6,28 @@ import darkMode from "../../../assets/icons/darkMode.svg";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const handleClick = () => {
+  const handleTitleClick = () => {
     navigate("/");
+  };
+  const handleBookmarkClick = () => {
+    navigate("/bookmark");
   };
 
   return (
     <>
       <div className="header flex flex-col">
         <div className="flex flex-row pb-2 justify-between">
-          <div className="p-2 text-[18px]" onClick={() => handleClick()}>
+          <div className="p-2 text-[18px]" onClick={() => handleTitleClick()}>
             대선 2025
           </div>
           <div className="flex flex-row space-x-2">
-            <img src={bookmarker} alt="bookmarker" width={30} height={30} />
+            <img
+              src={bookmarker}
+              alt="bookmarker"
+              width={30}
+              height={30}
+              onClick={() => handleBookmarkClick()}
+            />
             <img src={darkMode} alt="darkMode" width={30} height={30} />
           </div>
         </div>

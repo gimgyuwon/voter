@@ -95,7 +95,11 @@ export const Question = ({ onSubmit }) => {
         </div>
       </div>
       {alertMsg && (
-        <AlertModal message={alertMsg} onClose={() => setAlertMsg("")} />
+        <AlertModal
+          message={alertMsg}
+          buttonMessage="확인"
+          onButtonClick={() => setAlertMsg("")}
+        />
       )}
     </>
   );

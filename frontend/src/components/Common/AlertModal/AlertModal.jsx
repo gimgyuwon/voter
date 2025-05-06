@@ -1,4 +1,4 @@
-export const AlertModal = ({ message, onClose }) => {
+export const AlertModal = ({ message, buttonMessage, onButtonClick }) => {
   return (
     // background
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -9,10 +9,10 @@ export const AlertModal = ({ message, onClose }) => {
         {/* confirm button */}
         <div className="w-full"></div>
         <button
-          onClick={onClose}
+          onClick={onButtonClick}
           className="w-full justify-center mt-2 px-4 py-2 bg-main-500 text-white rounded-xl"
         >
-          확인
+          {buttonMessage}
         </button>
       </div>
     </div>
