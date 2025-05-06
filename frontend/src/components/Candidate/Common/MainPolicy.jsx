@@ -17,14 +17,14 @@ export const MainPolicy = ({ policy }) => {
         {policy?.map((policy, idx) => (
           <div
             key={idx}
-            className="relative flex flex-col justify-center w-full min-h-[86px] rounded-xl border-2 border-gray-200 p-3 space-y-1"
+            className="relative flex flex-col justify-center w-full min-h-[86px] rounded-xl border-2 border-gray-200 p-3"
           >
             {/* bookmark button */}
             <img
               src={bookmarker}
               alt="bookmarker"
               width={30}
-              className="absolute top-3 right-3"
+              className="absolute top-1.5 right-1.5"
             />
 
             {/* policy content */}

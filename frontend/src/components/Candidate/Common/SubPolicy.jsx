@@ -21,10 +21,10 @@ export const SubPolicy = ({ policy, compare = false }) => {
               src={bookmarker}
               alt="bookmarker"
               width={30}
-              className="absolute top-3 right-3"
+              className="absolute top-1.5 right-1.5"
             />
             {/* policy tag */}
-            <div className="flex flex-row gap-x-2 pb-2">
+            <div className="flex flex-row gap-x-1 pb-2">
               {policy.prop?.map((tag) => (
                 <div
                   className={`text-[14px] px-[8px] py-[1.5px] rounded-lg ${
