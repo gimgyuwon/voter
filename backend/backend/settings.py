@@ -19,6 +19,10 @@ KAKAO_CLIENT_ID = os.getenv("KAKAO_CLIENT_ID")
 KAKAO_REDIRECT_URI = os.getenv("KAKAO_REDIRECT_URI")
 KAKAO_SECRET_CODE = os.getenv("KAKAO_SECRET_CODE")
 
+print("KAKAO_CLIENT_ID:", KAKAO_CLIENT_ID)
+print("KAKAO_REDIRECT_URI:", KAKAO_REDIRECT_URI)
+print("KAKAO_SECRET_CODE:", KAKAO_SECRET_CODE)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
