@@ -1,10 +1,22 @@
 import requests
 from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.conf import settings
+from .models import User
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated
+
 
 # Create your views here.
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
+
+
 @api_view(['POST'])
 def kakao_login(request):
     code = request.data.get('code')
@@ -22,8 +34,6 @@ def kakao_login(request):
     }
 
     token_res = requests.post(token_url, data=token_data)
-    print("🧾 token response status:", token_res.status_code)
-    print("🧾 token response body:", token_res.text)
     token_json = token_res.json()
     access_token = token_json.get('access_token')
     if not access_token:
@@ -38,11 +48,16 @@ def kakao_login(request):
     kakao_id = user_info.get('id')
     nickname = user_info.get("kakao_account", {}).get("profile", {}).get("nickname")
 
-    return Response({
-        'kakao_id': kakao_id,
-        'nickname': nickname,
-        'access_token': access_token
+    # 기존 사용자 확인 or 새로 생성
+    user, _ = User.objects.get_or_create(kakao_id=kakao_id, defaults={'nickname': nickname})
+    tokens = get_tokens_for_user(user)
 
+    return Response({
+        'access_token': tokens['access'],
+        'refresh_token': tokens['refresh'],
+        'nickname': user.nickname,
+        'ideology': user.ideology,
+        'policyMatch': user.policy_match,
     })
 
 @api_view(['POST'])
@@ -92,8 +107,34 @@ def calculate_match(request):
     sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
     best_candidate = sorted_scores[0][0]
 
-    # 결과 반환환
+    # 결과 반환
     return Response({
         "ideology": ideology,
         "policyMatch": best_candidate
+    })
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def save_test_result(request):
+    ideology = request.data.get("ideology")
+    policy_match = request.data.get("policyMatch")
+
+    if not (ideology and policy_match):
+        return Response({"error": "Invalid data"}, status=400)
+
+    user = request.user
+    user.ideology = ideology
+    user.policy_match = policy_match
+    user.save()
+
+    return Response({"success": True})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_info(request):
+    user = request.user
+    return Response({
+        "nickname": user.nickname,
+        "ideology": user.ideology,
+        "policyMatch": user.policy_match,
     })
