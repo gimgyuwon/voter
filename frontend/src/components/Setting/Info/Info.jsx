@@ -1,19 +1,35 @@
+import { useNavigate } from "react-router-dom";
+
 export const Info = ({
   bookmarksCnt,
   ideology,
   policyMatch,
   cheerCandidate,
 }) => {
+  const navigate = useNavigate();
+  const handleBookmarkClick = () => {
+    navigate("/bookmark");
+  };
+  const handleCheerClick = () => {
+    navigate("/cheer");
+  };
+
   return (
     <>
       <div className="grid grid-cols-2 gap-x-3">
         {/* bookmark policy */}
-        <div className="bg-main-300 p-3 rounded-xl">
+        <div
+          className="bg-main-300 p-3 rounded-xl"
+          onClick={() => handleBookmarkClick()}
+        >
           <div className="text-main-700 text-[20px]">{bookmarksCnt || 0}개</div>
           <div className="text-gray-700">북마크한 공약</div>
         </div>
         {/* cheering candidate */}
-        <div className="bg-main-300 p-3 rounded-xl">
+        <div
+          className="bg-main-300 p-3 rounded-xl"
+          onClick={() => handleCheerClick()}
+        >
           <div className="text-main-700 text-[20px]">
             {cheerCandidate || "없음"}
           </div>
