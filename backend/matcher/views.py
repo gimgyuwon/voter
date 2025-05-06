@@ -20,6 +20,7 @@ def get_tokens_for_user(user):
 @api_view(['POST'])
 def kakao_login(request):
     code = request.data.get('code')
+    print("code:", code)
     if not code:
         return Response({'error': 'No code provided'}, status=400)
     
@@ -34,6 +35,8 @@ def kakao_login(request):
     }
 
     token_res = requests.post(token_url, data=token_data)
+    print("token status:", token_res.status_code)
+    print("token response:", token_res.text)
     token_json = token_res.json()
     access_token = token_json.get('access_token')
     if not access_token:
@@ -44,6 +47,8 @@ def kakao_login(request):
     headers = {'Authorization': f'Bearer {access_token}'}
     user_info_res = requests.get(user_info_url, headers=headers)
     user_info = user_info_res.json()
+    print("user info status:", user_info_res.status_code)
+    print("user info:", user_info_res.text)
 
     kakao_id = user_info.get('id')
     nickname = user_info.get("kakao_account", {}).get("profile", {}).get("nickname")
