@@ -10,7 +10,7 @@ export const SettingPage = () => {
   const handleLoginClick = () => {
     window.location.href = getKakaoAuthURL();
   };
-  const { user } = useAuthStore();
+  const { user, testResult } = useAuthStore();
 
   if (!user) {
     return (
@@ -28,7 +28,10 @@ export const SettingPage = () => {
       <Profile nickname={user?.nickname} />
 
       {/* 2nd row: Info */}
-      <Info />
+      <Info
+        ideology={testResult?.ideology}
+        policyMatch={testResult?.policyMatch}
+      />
 
       {/* 3rd row: test */}
       <div>다시 테스트하고 싶다면?</div>

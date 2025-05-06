@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
-import axios from "axios";
+import getKakaoAccessToken from "../utils/kakaoLogin";
+import fetchUserInfo from "../api/user";
 
 export const KakaoRedirectPage = () => {
   const { login } = useAuthStore();
@@ -10,30 +11,34 @@ export const KakaoRedirectPage = () => {
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get("code");
 
-    const fetchToken = async () => {
+    const fetchTokenAndUser = async () => {
       try {
-        const res = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/auth/kakao`,
-          { code }
+        const accessToken = await getKakaoAccessToken(code);
+        const { nickname, ideology, policyMatch } = await fetchUserInfo(
+          accessToken
         );
 
-        const { access_token, nickname } = res.data;
-
-        // LocalStorage
-        localStorage.setItem("access_token", access_token);
+        // localStorage 저장
+        localStorage.setItem("access_token", accessToken);
         localStorage.setItem("nickname", nickname);
 
-        // Zustand
-        login({ nickname }, access_token);
+        // Zustand 전역 상태 관리
+        login({
+          user: { nickname },
+          token: accessToken,
+          testResult: { ideology, policyMatch },
+        });
 
         navigate("/");
-      } catch (e) {
-        console.error(e);
+      } catch (err) {
+        console.error("로그인 실패:", err);
+        alert("카카오 로그인에 실패했습니다.");
+        navigate("/");
       }
     };
 
     if (code) {
-      fetchToken();
+      fetchTokenAndUser();
       window.history.replaceState({}, document.title, "/");
     }
   }, [navigate, login]);

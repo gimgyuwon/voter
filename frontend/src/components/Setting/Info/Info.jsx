@@ -1,4 +1,4 @@
-export const Info = () => {
+export const Info = ({ ideology, policyMatch }) => {
   return (
     <>
       <div className="grid grid-cols-2 gap-x-3">
@@ -18,12 +18,12 @@ export const Info = () => {
       <div className="grid grid-cols-2 gap-x-3">
         {/* bookmark policy */}
         <div className="bg-main-300 p-3 rounded-xl">
-          <div className="text-main-700 text-[20px]">중도</div>
+          <div className="text-main-700 text-[20px]">{ideology}</div>
           <div className="text-gray-700">나의 성향</div>
         </div>
         {/* cheering candidate */}
         <div className="bg-main-300 p-3 rounded-xl">
-          <div className="text-main-700 text-[20px]">홍길동</div>
+          <div className="text-main-700 text-[20px]">{policyMatch}</div>
           <div className="text-gray-700">정책 성향</div>
         </div>
       </div>

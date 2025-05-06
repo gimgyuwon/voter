@@ -4,22 +4,37 @@ const useAuthStore = create((set) => ({
   user: null,
   accessToken: null,
   bookmarks: [],
+  testResult: null,
 
   /** 로그인 처리 */
-  login: (userInfo, token) => set({ user: userInfo, accessToken: token }),
+  login: ({ user, token, testResult }) =>
+    set({
+      user,
+      accessToken: token,
+      testResult: testResult || null,
+    }),
 
   /** 로그아웃 처리 */
-  logout: () => set({ user: null, accessToken: null, bookmarks: [] }),
+  logout: () =>
+    set({
+      user: null,
+      accessToken: null,
+      bookmarks: [],
+      testResult: null,
+    }),
 
   /** 북마크 추가/제거 toggle */
   toggleBookmark: (policyId) =>
     set((state) => {
       const isBookmarked = state.bookmarks.includes(policyId);
-      return {
-        bookmarks: isBookmarked
-          ? state.bookmarks.filter((id) => id !== policyId)
-          : [...state.bookmarks, policyId],
-      };
+      const updated = isBookmarked
+        ? state.bookmarks.filter((id) => id !== policyId)
+        : [...state.bookmarks, policyId];
+
+      return { bookmarks: updated };
     }),
+
+  /** 성향 테스트 결과 수동 업데이트 */
+  setTestResult: (testResult) => set({ testResult }),
 }));
 export default useAuthStore;
