@@ -8,10 +8,10 @@ const useAuthStore = create((set, get) => ({
   testResult: null,
 
   /** 로그인 처리 */
-  login: ({ user, token, refreshToken, testResult, bookmarks = [] }) =>
+  login: ({ user, accessToken, refreshToken, testResult, bookmarks = [] }) =>
     set({
       user,
-      accessToken: token,
+      accessToken,
       refreshToken,
       testResult: testResult || null,
       bookmarks,

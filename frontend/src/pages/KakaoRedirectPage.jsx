@@ -13,7 +13,7 @@ export const KakaoRedirectPage = () => {
 
     const fetchTokenAndUser = async () => {
       try {
-        const accessToken = await getKakaoAccessToken(code);
+        const { accessToken, refreshToken } = await getKakaoAccessToken(code);
         localStorage.setItem("access_token", accessToken);
 
         const { nickname, ideology, policyMatch, bookmarks } =
@@ -23,7 +23,8 @@ export const KakaoRedirectPage = () => {
         // Zustand 전역 상태 관리
         login({
           user: { nickname },
-          accessToken: accessToken,
+          accessToken,
+          refreshToken,
           testResult: { ideology, policyMatch },
           bookmarks,
         });

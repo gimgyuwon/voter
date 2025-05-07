@@ -10,5 +10,5 @@ urlpatterns = [
     path('bookmark/toggle', toggle_bookmark),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path('candidates/', get_all_candidatee),
-    path("cheer/<int:candidate_id>/", cheer_candidate)
+    path("cheer", cheer_candidate)
  ]

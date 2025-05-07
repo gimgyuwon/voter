@@ -182,11 +182,15 @@ def toggle_bookmark(request):
     return Response({'bookmarked': bookmarked})
 
 @api_view(['POST'])
-def cheer_candidate(request, candidate_id):
+def cheer_candidate(request):
+    name = request.data.get('name')
+    if not name:
+        return Response({'error': 'No candidate name provided'}, status=400)
     try:
-        candidate = Candidate.objects.get(id=candidate_id)
+        candidate = Candidate.objects.get(name=name)
         candidate.cheer_count += 1
         candidate.save()
+        return Response({'success': True, 'cheerCount': candidate.cheer_count})
     except Candidate.DoesNotExist:
         return Response({'error': 'Candidate not found'}, status=404)
     
