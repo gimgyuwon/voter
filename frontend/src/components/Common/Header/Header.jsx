@@ -16,11 +16,11 @@ export const Header = () => {
   return (
     <>
       <div className="header flex flex-col">
-        <div className="flex flex-row pb-2 justify-between">
+        <div className="flex flex-row justify-between">
           <div className="p-2 text-[18px]" onClick={() => handleTitleClick()}>
             대선 2025
           </div>
-          <div className="flex flex-row space-x-2">
+          <div className="flex flex-row space-x-4">
             <img
               src={bookmarker}
               alt="bookmarker"

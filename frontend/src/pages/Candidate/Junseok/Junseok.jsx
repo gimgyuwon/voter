@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import junseok from "../../../assets/images/junseok.png";
 import MainPolicy from "../../../components/Candidate/Common/MainPolicy";
 import { CANDIDATE_POLICY } from "../../../constant/Candidate/CandidatePolicy";
@@ -8,6 +9,11 @@ import whiteLove from "../../../assets/icons/whiteLove.svg";
 
 export const Junseok = () => {
   const [selectedTag, setSelectedTag] = useState("전체");
+  const navigate = useNavigate();
+
+  const handleCheerClick = () => {
+    navigate("/cheer");
+  };
 
   const junseokPolicy = CANDIDATE_POLICY.filter(
     (item) => item.candidate === "이준석"
@@ -33,7 +39,12 @@ export const Junseok = () => {
         {/* Cherring button */}
         <button className="flex justify-center items-center min-h-10 gap-x-2 bg-rose-500 rounded-xl">
           <img src={whiteLove} alt="love" />
-          <div className="text-[16px] text-white font-medium">응원하기</div>
+          <div
+            className="text-[16px] text-white font-medium"
+            onClick={() => handleCheerClick()}
+          >
+            응원하기
+          </div>
         </button>
 
         {/* Main policy */}
