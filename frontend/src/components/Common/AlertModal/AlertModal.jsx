@@ -4,12 +4,15 @@ export const AlertModal = ({
   onButtonClick,
   secondButtonMessage,
   onSecondButtonClick,
+  children,
 }) => {
   return (
     // background
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       {/* modal box */}
       <div className="bg-white rounded-xl shadow-md w-4/5 max-w-sm p-6 text-center">
+        {/* children */}
+        {children && <div>{children}</div>}
         {/* message */}
         <div className="text-gray-800 text-base mb-4">{message}</div>
         {/* confirm button */}
