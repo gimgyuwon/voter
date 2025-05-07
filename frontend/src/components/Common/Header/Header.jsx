@@ -31,8 +31,8 @@ export const Header = () => {
             <img src={darkMode} alt="darkMode" width={30} height={30} />
           </div>
         </div>
-        <CandidateSelect />
       </div>
+      <CandidateSelect />
     </>
   );
 };

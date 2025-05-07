@@ -5,11 +5,11 @@ import CandidateCarousel from "../components/Home/CandidateCarousel/CandidateCar
 
 export const HomePage = () => {
   return (
-    <>
+    <div className="pb-5">
       <CandidateCarousel />
       <PolicyCard />
       <PolicyTest />
-    </>
+    </div>
   );
 };
 

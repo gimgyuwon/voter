@@ -18,7 +18,7 @@ export const CandidateSelect = () => {
 
   return (
     <Select
-      className="font-medium flex justify-center"
+      className="font-medium flex justify-center bg-sub-100 p-3"
       placeholder="후보자 이름을 선택하세요"
       options={CANDIDATE_OPTION}
       styles={CustomStyle}

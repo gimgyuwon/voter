@@ -10,7 +10,6 @@ import Chip from "../components/Common/Chip/Chip";
 export const BookmarkPage = () => {
   const navigate = useNavigate();
   const { user, bookmarks } = useAuthStore();
-  // !user 로 변경 필요
   const [alertOpen, setAlertOpen] = useState(!user);
   const [selectedTag, setSelectedTag] = useState("전체");
 
@@ -34,7 +33,7 @@ export const BookmarkPage = () => {
   if (alertOpen) {
     return (
       <AlertModal
-        message="로그인이 필요한 화면입니다"
+        message="북마크한 공약을 보시려면 로그인해 주세요"
         buttonMessage="로그인"
         onButtonClick={handleLoginClick}
         secondButtonMessage="나중에"
