@@ -8,7 +8,7 @@ export const PolicyItem = ({ icon, label, iconWidth = 24, prop }) => {
   };
   return (
     <div
-      className="flex flex-col aspect-square bg-[#F9FAFB] justify-center items-center rounded-xl"
+      className="flex flex-col aspect-square bg-sub-100 justify-center items-center rounded-xl"
       onClick={() => handleClick()}
     >
       <img
