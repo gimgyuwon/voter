@@ -156,4 +156,27 @@ def user_info(request):
         "nickname": user.nickname,
         "ideology": user.ideology,
         "policyMatch": user.policy_match,
+        "bookmarks": user.bookmarks,
     })
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def toggle_bookmark(request):
+    user = request.user
+    policy_id = request.data.get('policy_id')
+    if not isinstance(policy_id, int):
+        return Response({'error': 'policy_id 는 int 값이어야 합니다.'}, status = 400)
+    
+    bookmarks = user.bookmarks or []
+
+    if policy_id in bookmarks:
+        bookmarks.remove(policy_id)
+        bookmarked = False
+    else:
+        bookmarks.append(policy_id)
+        bookmarked = True
+
+    user.bookmarks = bookmarks
+    user.save()
+
+    return Response({'bookmarked': bookmarked})

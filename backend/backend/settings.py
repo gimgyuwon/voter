@@ -77,6 +77,8 @@ CORS_ALLOWED_ORIGINS = [
     'https://voter-frontend.vercel.app',
 ]
 
+CORS_ALLOW_CREDENTIALS = True
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
