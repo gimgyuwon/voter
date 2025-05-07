@@ -31,6 +31,16 @@ export const SettingPage = () => {
 
   return (
     <div className="space-y-3 pb-10">
+      <div className="py-5 justify-center flex">
+        {!user && (
+          <button
+            onClick={handleLoginClick}
+            className="w-[90%] justify-center mt-2 px-4 py-2 bg-main-500 text-white rounded-xl"
+          >
+            카카오로 로그인
+          </button>
+        )}
+      </div>
       {/* 1st row: profile */}
       <Profile nickname={user?.nickname} />
 

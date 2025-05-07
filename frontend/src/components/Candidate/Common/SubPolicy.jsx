@@ -6,9 +6,20 @@ import {
 import bookmarker from "../../../assets/icons/bookmarker.svg";
 import focusBookmarker from "../../../assets/icons/focusBookmarker.svg";
 import useAuthStore from "../../../store/useAuthStore";
+import updateBookmark from "../../../api/bookmark";
 
 export const SubPolicy = ({ policy, compare = false }) => {
   const { bookmarks, toggleBookmark } = useAuthStore();
+
+  const handleClickBookmark = async (id) => {
+    try {
+      await updateBookmark(id);
+      toggleBookmark(id);
+    } catch (err) {
+      console.error("북마크 실패", err);
+      alert("북마크 처리에 실패했습니다.");
+    }
+  };
 
   return (
     <div className="pb-5">
@@ -20,7 +31,7 @@ export const SubPolicy = ({ policy, compare = false }) => {
 
           return (
             <div
-              key={idx}
+              key={policy.id}
               className="relative flex flex-col justify-center w-full min-h-[134px] rounded-xl border-2 border-gray-200 p-3"
             >
               {/* bookmark button */}
@@ -29,7 +40,7 @@ export const SubPolicy = ({ policy, compare = false }) => {
                 alt={isBookmarked ? "focusBookmarker" : "bookmarker"}
                 width={13}
                 className="absolute top-4 right-4"
-                onClick={() => toggleBookmark(policy.id)}
+                onClick={() => handleClickBookmark(policy.id)}
               />
               {/* policy tag */}
               <div className="flex flex-row gap-x-1 pb-2">
@@ -38,6 +49,7 @@ export const SubPolicy = ({ policy, compare = false }) => {
                     className={`text-[14px] px-[8px] py-[1.5px] rounded-lg ${
                       CHIP_STYLE[tag] || "bg-main-500 text-white"
                     }`}
+                    key={tag}
                   >
                     {tag}
                   </div>

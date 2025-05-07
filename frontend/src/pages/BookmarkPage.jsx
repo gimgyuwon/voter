@@ -11,7 +11,7 @@ export const BookmarkPage = () => {
   const navigate = useNavigate();
   const { user, bookmarks } = useAuthStore();
   // !user 로 변경 필요
-  const [alertOpen, setAlertOpen] = useState(!!user);
+  const [alertOpen, setAlertOpen] = useState(!user);
   const [selectedTag, setSelectedTag] = useState("전체");
 
   const handleLoginClick = () => {

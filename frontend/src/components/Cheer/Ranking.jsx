@@ -9,7 +9,10 @@ export const Ranking = ({ rankingList }) => {
       {/* Ranking Title */}
       <div className="text-[18px] font-semibold">실시간 응원 순위</div>
       {Object.entries(rankingList)?.map(([rank, candidate]) => (
-        <div className="relative w-full flex flex-row gap-x-4 items-center justify-between">
+        <div
+          className="relative w-full flex flex-row gap-x-4 items-center justify-between"
+          key={rank}
+        >
           {/* Profile */}
           <img
             src={candidate?.squareImg}

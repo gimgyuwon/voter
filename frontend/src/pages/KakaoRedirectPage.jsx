@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
-import getKakaoAccessToken from "../utils/kakaoLogin";
+import getKakaoAccessToken from "../api/auth";
 import fetchUserInfo from "../api/user";
 
 export const KakaoRedirectPage = () => {
@@ -14,19 +14,18 @@ export const KakaoRedirectPage = () => {
     const fetchTokenAndUser = async () => {
       try {
         const accessToken = await getKakaoAccessToken(code);
-        const { nickname, ideology, policyMatch } = await fetchUserInfo(
-          accessToken
-        );
-
-        // localStorage 저장
         localStorage.setItem("access_token", accessToken);
+
+        const { nickname, ideology, policyMatch, bookmarks } =
+          await fetchUserInfo(accessToken);
         localStorage.setItem("nickname", nickname);
 
         // Zustand 전역 상태 관리
         login({
           user: { nickname },
-          token: accessToken,
+          accessToken: accessToken,
           testResult: { ideology, policyMatch },
+          bookmarks,
         });
 
         navigate("/");

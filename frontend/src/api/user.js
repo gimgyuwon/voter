@@ -1,17 +1,12 @@
-import axios from "axios";
+import axios from "../utils/Common/axios";
 
-export const fetchUserInfo = async (accessToken) => {
+export const fetchUserInfo = async () => {
   try {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/user-info`,
-      {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error("유저 정보 요청 실패:", error);
-    throw error;
+    const res = await axios.get("/api/user-info");
+    return res.data;
+  } catch (err) {
+    console.error("유저 정보 요청 실패:", err);
+    throw err;
   }
 };
 

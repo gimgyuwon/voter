@@ -12,6 +12,7 @@ const useAuthStore = create((set) => ({
       user,
       accessToken: token,
       testResult: testResult || null,
+      bookmarks,
     }),
 
   /** 로그아웃 처리 */
