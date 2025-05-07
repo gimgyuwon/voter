@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.conf import settings
-from .models import User
+from .models import User, Candidate
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 
@@ -180,3 +180,20 @@ def toggle_bookmark(request):
     user.save()
 
     return Response({'bookmarked': bookmarked})
+
+@api_view(['POST'])
+def cheer_candidate(request, candidate_id):
+    try:
+        candidate = Candidate.objects.get(id=candidate_id)
+        candidate.cheer_count += 1
+        candidate.save()
+    except Candidate.DoesNotExist:
+        return Response({'error': 'Candidate not found'}, status=404)
+    
+@api_view(['GET'])
+def get_all_candidatee(request):
+    candidates = Candidate.objects.all().order_by('-cheer_count')
+    data = [
+        {'name': c.name, 'cheerCount': c.cheer_count} for c in candidates
+    ]
+    return Response(data)

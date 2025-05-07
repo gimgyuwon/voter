@@ -14,3 +14,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.nickname
+
+class Candidate(models.Model):
+    name = models.CharField(max_length=100)
+    cheer_count = models.PositiveIntegerField(default=0)

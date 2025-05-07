@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import kakao_login, calculate_match, save_test_result, user_info, toggle_bookmark
+from .views import kakao_login, calculate_match, save_test_result, user_info, toggle_bookmark, get_all_candidatee, cheer_candidate
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
@@ -9,4 +9,6 @@ urlpatterns = [
     path('user-info', user_info),
     path('bookmark/toggle', toggle_bookmark),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path('candidates/', get_all_candidatee),
+    path("cheer/<int:candidate_id>/", cheer_candidate)
  ]
