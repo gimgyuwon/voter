@@ -13,6 +13,7 @@ import Junseok from "../pages/Candidate/Junseok/Junseok";
 import Jaeyeon from "../pages/Candidate/Jaeyeon/Jaeyeon";
 import Nakyeon from "../pages/Candidate/Nakyeon/Nakyeon";
 import KakaoRedirectPage from "../pages/KakaoRedirectPage";
+import CreditsPage from "../pages/CreditPage/CreditPage";
 
 const AppRouter = () => {
   return (
@@ -25,6 +26,7 @@ const AppRouter = () => {
         <Route path="/cheer" element={<CheerPage />} />
         <Route path="/setting" element={<SettingPage />} />
         <Route path="/bookmark" element={<BookmarkPage />} />
+        <Route path="/credit" element={<CreditsPage />} />
 
         {/* Oauth routes form kakao login */}
         <Route path="/oauth/kakao/callback" element={<KakaoRedirectPage />} />
