@@ -1,27 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import getKakaoAuthURL from "../../utils/kakaoAuthUrl";
 import useAuthStore from "../../store/useAuthStore";
 import AlertModal from "../../components/Common/AlertModal/AlertModal";
 import Profile from "../../components/Setting/Profile/Profile";
 import Info from "../../components/Setting/Info/Info";
 import PolicyTest from "../../components/Home/PolicyTest/PolicyTest";
+import { useNavigate } from "react-router-dom";
 
 export const SettingPage = () => {
   const { user, bookmarks, testResult } = useAuthStore();
-  const [alertOpen, setAlertOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleLoginClick = () => {
     window.location.href = getKakaoAuthURL();
   };
   const handleNextClick = () => {
-    setAlertOpen(true);
+    navigate("/");
   };
 
-  useEffect(() => {
-    setAlertOpen(!user);
-  }, [user]);
-
-  if (alertOpen) {
+  if (!user) {
     return (
       <AlertModal
         message="로그인이 필요한 화면입니다"
