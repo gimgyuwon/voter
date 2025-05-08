@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
 import getKakaoAccessToken from "../api/auth";
 import fetchUserInfo from "../api/user";
+import Loading from "../components/Common/Loading/Loading";
 
 export const KakaoRedirectPage = () => {
   const { login } = useAuthStore();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get("code");
@@ -34,6 +36,8 @@ export const KakaoRedirectPage = () => {
         console.error("로그인 실패:", err);
         alert("카카오 로그인에 실패했습니다.");
         navigate("/");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -43,7 +47,7 @@ export const KakaoRedirectPage = () => {
     }
   }, [navigate, login]);
 
-  return null;
+  return loading ? <Loading /> : null;
 };
 
 export default KakaoRedirectPage;
