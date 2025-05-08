@@ -49,7 +49,7 @@ export const BookmarkPage = () => {
   return (
     <div className="space-y-4">
       <div className="text-[18px] py-1">
-        북마크한 공약 {bookmarks.length || 0}개
+        북마크한 공약 {bookmarks.length ?? 0}개
       </div>
       <Chip select={selectedTag} onSelect={setSelectedTag} />
       <SubPolicy policy={subPolicy} compare={true} />

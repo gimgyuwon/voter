@@ -9,7 +9,7 @@ export const Profile = ({ nickname }) => {
         <div className="flex flex-row gap-x-1">
           <div>유권자</div>
           <div>
-            <strong className="text-main-700">{nickname || "투표하자"}</strong>{" "}
+            <strong className="text-main-700">{nickname ?? "투표하자"}</strong>{" "}
             님
           </div>
         </div>

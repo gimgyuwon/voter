@@ -34,7 +34,7 @@ const useAuthStore = create((set, get) => ({
       const updated = isBookmarked
         ? state.bookmarks.filter((id) => id !== policyId)
         : [...state.bookmarks, policyId];
-      localStorage.setItem("bookmarks", JSON.stringify(updated));
+
       return { bookmarks: updated };
     }),
 

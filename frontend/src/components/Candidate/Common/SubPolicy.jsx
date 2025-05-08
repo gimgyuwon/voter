@@ -47,7 +47,7 @@ export const SubPolicy = ({ policy, compare = false }) => {
                 {policy.prop?.map((tag) => (
                   <div
                     className={`text-[14px] px-[8px] py-[1.5px] rounded-lg ${
-                      CHIP_STYLE[tag] || "bg-main-500 text-white"
+                      CHIP_STYLE[tag] ?? "bg-main-500 text-white"
                     }`}
                     key={tag}
                   >
