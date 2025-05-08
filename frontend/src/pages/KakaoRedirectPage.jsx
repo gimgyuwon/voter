@@ -17,10 +17,14 @@ export const KakaoRedirectPage = () => {
       try {
         const { accessToken, refreshToken } = await getKakaoAccessToken(code);
         localStorage.setItem("access_token", accessToken);
+        localStorage.setItem("refresh_token", refreshToken);
 
         const { nickname, ideology, policyMatch, bookmarks } =
           await fetchUserInfo(accessToken);
         localStorage.setItem("nickname", nickname);
+        localStorage.setItem("ideology", ideology);
+        localStorage.setItem("policyMatch", policyMatch);
+        localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 
         // Zustand 전역 상태 관리
         login({

@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Common/Header/Header";
 import Footer from "./components/Common/Footer/Footer";
 import AppRouter from "./routes/AppRouter";
+import useAuthStore from "./store/useAuthStore";
 
 function App() {
+  const { login } = useAuthStore();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
+    const refreshToken = localStorage.getItem("refresh_token");
+    const nickname = localStorage.getItem("nickname");
+    const ideology = localStorage.getItem("ideology");
+    const policyMatch = localStorage.getItem("policyMatch");
+    const bookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+
+    if (accessToken && refreshToken && nickname) {
+      login({
+        user: { nickname },
+        accessToken,
+        refreshToken,
+        testResult: { ideology, policyMatch },
+        bookmarks,
+      });
+    }
+  }, [login]);
+
   return (
     <BrowserRouter>
       <Header />

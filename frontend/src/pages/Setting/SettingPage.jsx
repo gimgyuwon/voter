@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import getKakaoAuthURL from "../../utils/kakaoAuthUrl";
 import useAuthStore from "../../store/useAuthStore";
 import AlertModal from "../../components/Common/AlertModal/AlertModal";
@@ -8,7 +8,7 @@ import PolicyTest from "../../components/Home/PolicyTest/PolicyTest";
 
 export const SettingPage = () => {
   const { user, bookmarks, testResult } = useAuthStore();
-  const [alertOpen, setAlertOpen] = useState(!!user);
+  const [alertOpen, setAlertOpen] = useState(false);
 
   const handleLoginClick = () => {
     window.location.href = getKakaoAuthURL();
@@ -17,7 +17,11 @@ export const SettingPage = () => {
     setAlertOpen(true);
   };
 
-  if (!alertOpen) {
+  useEffect(() => {
+    setAlertOpen(!user);
+  }, [user]);
+
+  if (alertOpen) {
     return (
       <AlertModal
         message="로그인이 필요한 화면입니다"

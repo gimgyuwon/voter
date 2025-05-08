@@ -1,6 +1,6 @@
 import AlertModal from "../components/Common/AlertModal/AlertModal";
 import useAuthStore from "../store/useAuthStore";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import getKakaoAuthURL from "../utils/kakaoAuthUrl";
 import { useNavigate } from "react-router-dom";
 import SubPolicy from "../components/Candidate/Common/SubPolicy";
@@ -10,8 +10,12 @@ import Chip from "../components/Common/Chip/Chip";
 export const BookmarkPage = () => {
   const navigate = useNavigate();
   const { user, bookmarks } = useAuthStore();
-  const [alertOpen, setAlertOpen] = useState(!user);
+  const [alertOpen, setAlertOpen] = useState(false);
   const [selectedTag, setSelectedTag] = useState("전체");
+
+  useEffect(() => {
+    setAlertOpen(!user);
+  }, [user]);
 
   const handleLoginClick = () => {
     window.location.href = getKakaoAuthURL();
