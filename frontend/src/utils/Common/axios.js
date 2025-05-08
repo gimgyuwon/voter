@@ -10,7 +10,6 @@ const instance = axios.create({
 instance.interceptors.request.use(async (config) => {
   try {
     const token = await useAuthStore.getState().getValidAccessToken();
-    console.log("토큰 확인:", token);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
