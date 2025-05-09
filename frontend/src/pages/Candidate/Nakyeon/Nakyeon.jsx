@@ -19,7 +19,15 @@ export const Nakyeon = () => {
         buttonMessage="확인"
         onButtonClick={() => setAlertOpen(false)}
       >
-        <ComingSoon />
+        <ComingSoon
+          message={
+            <>
+              아직 예비후보로 등록되지 않은 후보입니다.
+              <br />
+              공식 등록 이후 업데이트될 예정입니다.
+            </>
+          }
+        />
       </AlertModal>
     );
   }
