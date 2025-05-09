@@ -1,28 +1,30 @@
 import { useNavigate } from "react-router-dom";
-import ComingSoon from "../../../components/Common/ComingSoon";
 import jaemyeong from "../../../assets/images/jaemyeong.png";
 import whiteLove from "../../../assets/icons/whiteLove.svg";
 import { useState } from "react";
-import AlertModal from "../../../components/Common/AlertModal/AlertModal";
+import { CANDIDATE_POLICY } from "../../../constant/Candidate/CandidatePolicy";
+import MainPolicy from "../../../components/Candidate/Common/MainPolicy";
+import Chip from "../../../components/Common/Chip/Chip";
+import SubPolicy from "../../../components/Candidate/Common/SubPolicy";
 
 export const Jaemyeong = () => {
-  const [alertOpen, setAlertOpen] = useState(true);
+  const [selectedTag, setSelectedTag] = useState("전체");
   const navigate = useNavigate();
 
   const handleCheerClick = () => {
     navigate("/cheer");
   };
 
-  if (alertOpen) {
-    return (
-      <AlertModal
-        buttonMessage="확인"
-        onButtonClick={() => setAlertOpen(false)}
-      >
-        <ComingSoon />
-      </AlertModal>
-    );
-  }
+  const jaemyeongPolicy = CANDIDATE_POLICY.filter(
+    (item) => item.candidate === "이재명"
+  );
+
+  const mainPolicy = jaemyeongPolicy.filter((item) => item.main);
+
+  const subPolicy =
+    selectedTag === "전체"
+      ? jaemyeongPolicy
+      : jaemyeongPolicy.filter((item) => item.prop?.includes(selectedTag));
 
   return (
     <>
@@ -44,6 +46,20 @@ export const Jaemyeong = () => {
             응원하기
           </div>
         </button>
+        {/* Main policy */}
+        <MainPolicy policy={mainPolicy} />
+
+        {/* Chip filter */}
+        <Chip select={selectedTag} onSelect={setSelectedTag} />
+
+        <div className="block text-xs text-sub-500">
+          ※ 일부 후보자의 정책은 해당 후보자의 페이스북 게시물을 참고하여
+          작성되었습니다. 공식 공약집 발표 이후, 내용은 순차적으로 업데이트될
+          예정입니다.
+        </div>
+
+        {/* Sub policy */}
+        <SubPolicy policy={subPolicy} />
       </div>
     </>
   );
