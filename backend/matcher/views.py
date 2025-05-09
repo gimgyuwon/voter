@@ -6,6 +6,7 @@ from django.conf import settings
 from .models import User, Candidate
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
+import math
 
 
 # Create your views here.
@@ -79,57 +80,42 @@ def kakao_login(request):
     except Exception as e:
         return Response({'error': 'Server error', 'detail': str(e)}, status=500)
 
+# 후보자 벡터
+CANDIDATE_VECTORS = {
+    "이재명": [5, 2, 5, 2, 4, 3, 5, 4, 5, 2, 2, 2, 3, 5, 5],
+    "김재연": [5, 1, 5, 1, 5, 1, 5, 5, 5, 1, 1, 1, 3, 5, 5],
+    "김문수": [2, 5, 2, 5, 2, 5, 3, 2, 2, 5, 5, 5, 4, 2, 2],
+    "이준석": [3, 4, 3, 4, 3, 4, 3, 3, 3, 4, 4, 4, 5, 3, 3],
+}
+
+# 코사인 유사도 계산 함수
+def cosine_similarity(v1, v2):
+    dot = sum(a * b for a, b in zip(v1, v2))
+    norm1 = math.sqrt(sum(a ** 2 for a in v1))
+    norm2 = math.sqrt(sum(b ** 2 for b in v2))
+    return dot / (norm1 * norm2) if norm1 and norm2 else 0
+
 @api_view(['POST'])
-def calculate_match(request):
-    # 사용자가 보낸 데이터(json)
+def calculate_match_cosine(request):
     data = request.data
 
-    # 정치 성향 점수 계산(1~7번 질문 평균)
-    progressive_keys = ['q1', 'q3', 'q4']
-    conservative_keys = ['q2', 'q5', 'q6', 'q7']
+    # 15개 질문 순서대로 응답 벡터 생성
+    question_keys = [f"q{i}" for i in range(1, 16)]
+    user_vector = [data.get(k, 3) for k in question_keys]  # 미응답은 중립값 3
 
-    score = 0
-    for k in progressive_keys:
-        score += data.get(k, 0)
-    for k in conservative_keys:
-        score += 6 - data.get(k, 0)
-
-    ideology_score = score / 7
-
-    # 점수에 따라 보수/중도/진보 분류
-    if ideology_score >= 4:
-        ideology = "진보"
-    elif ideology_score >= 2.5:
-        ideology = "중도"
-    else:
-        ideology = "보수"
-
-
-    # 공약 기반 점수 계산
-    candidate_weights = {
-    '김문수': {'q8': 5, 'q10': 4},
-    '이재명': {'q9': 5, 'q10': 5, 'q13': 3},
-    '이준석': {'q11': 4, 'q12': 5},
-    '김재연': {'q14': 5, 'q15': 4, 'q13': 2},
+    # 후보자별 유사도 계산
+    similarities = {
+        name: cosine_similarity(user_vector, vector)
+        for name, vector in CANDIDATE_VECTORS.items()
     }
 
+    # 유사도 기준 내림차순 정렬
+    sorted_candidates = sorted(similarities.items(), key=lambda x: x[1], reverse=True)
+    best_match = sorted_candidates[0][0]
 
-    scores = {}
-    for name, weights in candidate_weights.items():
-        total = 0
-        for question_key, weight in weights.items():
-            total += data.get(question_key, 0) * weight
-        scores[name] = total
-
-
-    # 점수 높은 순으로 정렬
-    sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
-    best_candidate = sorted_scores[0][0]
-
-    # 결과 반환
     return Response({
-        "ideology": ideology,
-        "policyMatch": best_candidate
+        "bestMatch": best_match,
+        "similarities": similarities,
     })
 
 @api_view(['POST'])
