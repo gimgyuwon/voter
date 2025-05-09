@@ -88,34 +88,62 @@ CANDIDATE_VECTORS = {
     "이준석": [3, 4, 3, 4, 3, 4, 3, 3, 3, 4, 4, 4, 5, 3, 3],
 }
 
-# 코사인 유사도 계산 함수
+# 코사인 유사도 함수
 def cosine_similarity(v1, v2):
     dot = sum(a * b for a, b in zip(v1, v2))
     norm1 = math.sqrt(sum(a ** 2 for a in v1))
     norm2 = math.sqrt(sum(b ** 2 for b in v2))
     return dot / (norm1 * norm2) if norm1 and norm2 else 0
 
+# 정치 성향 분류 함수
+def classify_ideology(user_vector):
+    # 진보 성향: q1, q3, q5, q8, q9, q14, q15
+    # 보수 성향: q2, q4, q6, q10, q11, q12
+    # 중도 관련 q13은 제외
+
+    progressive_indices = [0, 2, 4, 7, 8, 13, 14]
+    conservative_indices = [1, 3, 5, 9, 10, 11]
+
+    progressive_score = sum(user_vector[i] for i in progressive_indices)
+    conservative_score = sum(6 - user_vector[i] for i in conservative_indices)
+    total_score = progressive_score + conservative_score
+    ideology_score = total_score / (len(progressive_indices) + len(conservative_indices))
+
+    if ideology_score >= 4.5:
+        return "강한 진보"
+    elif ideology_score >= 3.5:
+        return "약한 진보"
+    elif ideology_score >= 2.5:
+        return "중도"
+    elif ideology_score >= 1.5:
+        return "약한 보수"
+    else:
+        return "강한 보수"
+
 @api_view(['POST'])
-def calculate_match_cosine(request):
+def calculate_match(request):
     data = request.data
 
-    # 15개 질문 순서대로 응답 벡터 생성
+    # 사용자 응답 벡터 생성
     question_keys = [f"q{i}" for i in range(1, 16)]
-    user_vector = [data.get(k, 3) for k in question_keys]  # 미응답은 중립값 3
+    user_vector = [data.get(k, 3) for k in question_keys]  # 응답 없으면 중립값 3
 
-    # 후보자별 유사도 계산
+    # 정치 성향 계산
+    ideology = classify_ideology(user_vector)
+
+    # 유사도 계산
     similarities = {
         name: cosine_similarity(user_vector, vector)
         for name, vector in CANDIDATE_VECTORS.items()
     }
 
-    # 유사도 기준 내림차순 정렬
     sorted_candidates = sorted(similarities.items(), key=lambda x: x[1], reverse=True)
     best_match = sorted_candidates[0][0]
 
     return Response({
-        "bestMatch": best_match,
-        "similarities": similarities,
+        "ideology": ideology,
+        "policyMatch": best_match,
+        # "similarities": similarities,
     })
 
 @api_view(['POST'])
