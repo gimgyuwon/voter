@@ -1,19 +1,7 @@
-export const ThemeModal = ({ setThemeOpen }) => {
-  const changeTheme = (themeName) => {
-    const root = document.documentElement;
-    root.classList.remove(
-      "theme-red",
-      "theme-yellow",
-      "theme-green",
-      "theme-blue",
-      "theme-purple",
-      "theme-brown",
-      "theme-black"
-    );
+import useAuthStore from "../../../store/useAuthStore";
 
-    if (themeName === "black") return;
-    root.classList.add(`theme-${themeName}`);
-  };
+export const ThemeModal = ({ setThemeOpen }) => {
+  const setTheme = useAuthStore((state) => state.setTheme);
 
   return (
     // background
@@ -26,37 +14,37 @@ export const ThemeModal = ({ setThemeOpen }) => {
           {/* red */}
           <div
             className="rounded-full w-8 h-8 bg-red-500 hover:border-2 hover:ring-2 hover:ring-red-300 transition-all duration-150"
-            onClick={() => changeTheme("red")}
+            onClick={() => setTheme("red")}
           />
           {/* yellow */}
           <div
             className="rounded-full w-8 h-8 bg-yellow-500 hover:border-2 hover:ring-2 hover:ring-yellow-300 transition-all duration-150"
-            onClick={() => changeTheme("yellow")}
+            onClick={() => setTheme("yellow")}
           />
           {/* green */}
           <div
             className="rounded-full w-8 h-8 bg-green-500 hover:border-2 hover:ring-2 hover:ring-green-300 transition-all duration-150"
-            onClick={() => changeTheme("green")}
+            onClick={() => setTheme("green")}
           />
           {/* blue */}
           <div
             className="rounded-full w-8 h-8 bg-blue-500 hover:border-2 hover:ring-2 hover:ring-blue-300 transition-all duration-150"
-            onClick={() => changeTheme("blue")}
+            onClick={() => setTheme("blue")}
           />
           {/* purple */}
           <div
             className="rounded-full w-8 h-8 bg-purple-500 hover:border-2 hover:ring-2 hover:ring-purple-300 transition-all duration-150"
-            onClick={() => changeTheme("purple")}
+            onClick={() => setTheme("purple")}
           />
           {/* brown */}
           <div
             className="rounded-full w-8 h-8 bg-yellow-700 hover:border-2 hover:ring-2 hover:ring-yellow-500 transition-all duration-150"
-            onClick={() => changeTheme("brown")}
+            onClick={() => setTheme("brown")}
           />
           {/* black */}
           <div
             className="rounded-full w-8 h-8 bg-gray-500 hover:border-2 hover:ring-2 hover:ring-black-300 transition-all duration-150"
-            onClick={() => changeTheme("black")}
+            onClick={() => setTheme("black")}
           />
         </div>
 

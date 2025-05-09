@@ -41,13 +41,15 @@ export const Info = ({
       <div className="grid grid-cols-2 gap-x-3">
         {/* bookmark policy */}
         <div className="bg-main-100 p-3 rounded-xl">
-          <div className="text-main-700 text-[20px]">{ideology ?? "없음"}</div>
+          <div className="text-main-700 text-[20px]">
+            {!ideology || ideology === "null" ? "없음" : ideology}
+          </div>
           <div className="text-gray-700">나의 성향</div>
         </div>
         {/* cheering candidate */}
         <div className="bg-main-100 p-3 rounded-xl">
           <div className="text-main-700 text-[20px]">
-            {policyMatch ?? "없음"}
+            {!policyMatch || policyMatch === "null" ? "없음" : policyMatch}
           </div>
           <div className="text-gray-700">정책 성향</div>
         </div>

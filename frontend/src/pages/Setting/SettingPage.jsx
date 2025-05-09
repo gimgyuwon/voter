@@ -8,17 +8,22 @@ import PolicyTest from "../../components/Home/PolicyTest/PolicyTest";
 import { useNavigate } from "react-router-dom";
 
 export const SettingPage = () => {
-  const { user, bookmarks, testResult } = useAuthStore();
+  const { user, bookmarks, testResult, logout } = useAuthStore();
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
     window.location.href = getKakaoAuthURL();
   };
+
+  const handleLogoutClick = () => {
+    logout();
+  };
+
   const handleNextClick = () => {
     navigate("/");
   };
 
-  if (!!user) {
+  if (!user) {
     return (
       <AlertModal
         message="로그인이 필요한 화면입니다"
@@ -58,14 +63,18 @@ export const SettingPage = () => {
       <div>다시 테스트하고 싶다면?</div>
       <PolicyTest />
 
-      <button
-        className="text-sm text-blue-600 underline"
-        onClick={() =>
-          window.open("https://forms.gle/bNprjEaHwV5bSkSd9", "_blank")
-        }
-      >
-        의견 제시하기
-      </button>
+      <div className="flex flex-row justify-between text-main-700 underline">
+        <button
+          className="underline"
+          onClick={() =>
+            window.open("https://forms.gle/bNprjEaHwV5bSkSd9", "_blank")
+          }
+        >
+          의견 제시하기
+        </button>
+
+        <div onClick={() => handleLogoutClick()}>로그아웃 &gt;&gt;</div>
+      </div>
     </div>
   );
 };

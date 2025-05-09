@@ -27,9 +27,9 @@ export const CandidateCarousel = () => {
 
   return (
     <div className="relative w-full">
-      <div className="relative w-full h-[150px] flex items-center justify-center rounded-xl bg-main-100 bg-opacity-50">
+      <div className="relative w-full h-[150px] flex items-center justify-center rounded-xl">
         <img
-          src={CANDIDATE_OPTION[idx].image}
+          src={CANDIDATE_OPTION[idx].transparentImg}
           alt={`Slide ${idx}`}
           onClick={handleImgClick}
           className="w-full h-full object-contain"

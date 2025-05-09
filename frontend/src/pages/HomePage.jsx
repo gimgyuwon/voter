@@ -5,7 +5,7 @@ import CandidateCarousel from "../components/Home/CandidateCarousel/CandidateCar
 
 export const HomePage = () => {
   return (
-    <div className="pb-5">
+    <div className="pb-5 gap-y-4">
       <CandidateCarousel />
       <PolicyCard />
       <PolicyTest />
