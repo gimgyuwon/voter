@@ -53,7 +53,7 @@ export const Jaemyeong = () => {
         <Chip select={selectedTag} onSelect={setSelectedTag} />
 
         <div className="block text-xs text-sub-500">
-          ※ 일부 후보자의 정책은 해당 후보자의 페이스북 게시물을 참고하여
+          ※ 해당 후보자의 정책은 해당 후보자의 페이스북 게시물을 참고하여
           작성되었습니다. 공식 공약집 발표 이후, 내용은 순차적으로 업데이트될
           예정입니다.
         </div>
