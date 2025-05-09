@@ -141,7 +141,7 @@ export const CANDIDATE_POLICY = [
   {
     id: 18,
     title: "주 4.5일제 도입 기업 지원",
-    content: "주 4,5일제를 도입하는 기업에 대해 지원을 통해 실노동시간 단축",
+    content: "주 4,5일제를 도입하는 기업에 대해 \n지원을 통해 실노동시간 단축",
     prop: ["경제", "행정", "2030"],
     main: true,
     candidate: "이재명",
@@ -149,7 +149,7 @@ export const CANDIDATE_POLICY = [
   {
     id: 19,
     title: "연차휴가 요건 완화 및 이월제 도입",
-    content: "휴가 사용 요건 완화, 3년간 이월 가능한 연차휴가 저축 제도 도입",
+    content: "휴가 사용 요건 완화 \n3년간 이월 가능한 연차휴가 저축 제도 도입",
     prop: ["복지", "행정", "2030"],
     main: false,
     candidate: "이재명",
@@ -173,7 +173,7 @@ export const CANDIDATE_POLICY = [
   {
     id: 22,
     title: "반도체 특별법 제정",
-    content: "기업이 반도체 개발에 주력할 수 있도록 특별법 신설",
+    content: "기업이 반도체 개발에 \n주력할 수 있도록 특별법 신설",
     prop: ["기술", "경제", "4050"],
     main: false,
     candidate: "이재명",
@@ -221,7 +221,7 @@ export const CANDIDATE_POLICY = [
   {
     id: 28,
     title: "한미 확장억제 강화",
-    content: "한미 핵·재래식 통합 훈련(CNI) 강화, 핵공격 보호조항 명문화 추진",
+    content: "한미 핵·재래식 통합 훈련(CNI) 강화 \n핵공격 보호조항 명문화 추진",
     prop: ["국방", "행정"],
     main: false,
     candidate: "김문수",
@@ -245,7 +245,7 @@ export const CANDIDATE_POLICY = [
   {
     id: 31,
     title: "GTX 전국 확대",
-    content: "A~C노선 임기 내 개통, D~F노선 착공 및 지방 확장",
+    content: "A~C노선 임기 내 개통 \nD~F노선 착공 및 지방 확장",
     prop: ["행정", "주택", "2030"],
     main: true,
     candidate: "김문수",
@@ -253,7 +253,8 @@ export const CANDIDATE_POLICY = [
   {
     id: 32,
     title: "감세·세제 개편",
-    content: "중산층 위한 물가연동 종합소득세, 공제항목 상향, 상속세 개편",
+    content:
+      "중산층 위한 물가연동 종합소득세 적용 \n 및 공제항목 상향, 상속세 개편",
     prop: ["경제", "행정", "4050"],
     main: true,
     candidate: "김문수",
@@ -277,7 +278,8 @@ export const CANDIDATE_POLICY = [
   {
     id: 35,
     title: "고령자 맞춤형 공공주택",
-    content: "신규 공공주택 25%에 돌봄·식사 등 고령자 전용 편의시설 의무 설치",
+    content:
+      "신규 공공주택 25%에 돌봄·식사 등 \n고령자 전용 편의시설 의무 설치",
     prop: ["복지", "주택", "60+"],
     main: false,
     candidate: "김문수",
@@ -325,7 +327,7 @@ export const CANDIDATE_POLICY = [
   {
     id: 41,
     title: "상속세 10조원 청년예산화",
-    content: "상속세 10조원 전액을 청년불평등 해소기금으로 적립",
+    content: "상속세 10조원 전액을 \n청년불평등 해소기금으로 적립",
     prop: ["경제", "2030"],
     main: false,
     candidate: "김재연",
@@ -333,7 +335,7 @@ export const CANDIDATE_POLICY = [
   {
     id: 42,
     title: "천원주택 전국 확대",
-    content: "하루 임대료 1000원, 월 3만원 천원주택 전국 대폭 확대",
+    content: "하루 임대료 1000원, \n월 3만원 천원주택 전국 대폭 확대",
     prop: ["주택", "2030"],
     main: true,
     candidate: "김재연",
@@ -348,9 +350,9 @@ export const CANDIDATE_POLICY = [
   },
   {
     id: 44,
-    title: " 알바(초단시간노동), 인턴 청년의 노동권 보호",
+    title: "초단시간노동자(알바)의 노동권 보호",
     content:
-      "노동시간 비례 주휴 보장 도입으로 초단시간 노동자 보호. \n수습 3개월 최저임금 90% 지급 허용 조항 삭제",
+      "노동시간 비례 주휴 보장 도입. \n수습 3개월 최저임금 90% 지급 허용 조항 삭제",
     prop: ["경제", "2030"],
     main: true,
     candidate: "김재연",
@@ -368,7 +370,7 @@ export const CANDIDATE_POLICY = [
     id: 46,
     title: "고등교육 무상화",
     content:
-      "고등교육재정교부금법 제정 \n GDP 1.2% 수준으로 고등교육재정 확대, 대학 무상교육 전면 실현",
+      "고등교육재정교부금법 제정 \n GDP 1.2% 수준으로 고등교육재정 확대, \n대학 무상교육 전면 실현",
     prop: ["교육", "2030"],
     main: false,
     candidate: "김재연",
@@ -376,7 +378,7 @@ export const CANDIDATE_POLICY = [
   {
     id: 47,
     title: "비동의 강간죄 도입",
-    content: "폭행·협박이 없더라도 동의없는 성관계는 범죄로 처벌",
+    content: "폭행·협박이 없더라도 \n동의없는 성관계는 범죄로 처벌",
     prop: ["행정", "2030"],
     main: false,
     candidate: "김재연",
@@ -384,8 +386,7 @@ export const CANDIDATE_POLICY = [
   {
     id: 48,
     title: "파트너폭력 방지법 제정 ",
-    content:
-      "결혼 여부와 상관없이 동거·연인·이혼한 배우자·성소수자 커플 등 \n모든 친밀한 관계에서의 폭력에 대한 처벌, 피해자 보호조치 강화",
+    content: "모든 친밀한 관계에서의 폭력에 대한 처벌, \n피해자 보호조치 강화",
     prop: ["복지", "2030"],
     main: false,
     candidate: "김재연",
@@ -393,7 +394,8 @@ export const CANDIDATE_POLICY = [
   {
     id: 49,
     title: "국민연금 청년 국가지원",
-    content: "청년 초기 5년동안 평균소득월액 기준으로 국가가 보험료 전액 납입 ",
+    content:
+      "청년 초기 5년동안 평균소득월액 기준으로 \n국가가 보험료 전액 납입 ",
     prop: ["복지", "2030"],
     main: false,
     candidate: "김재연",
