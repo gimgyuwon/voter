@@ -57,6 +57,15 @@ export const SettingPage = () => {
       {/* 3rd row: test */}
       <div>다시 테스트하고 싶다면?</div>
       <PolicyTest />
+
+      <button
+        className="text-sm text-blue-600 underline"
+        onClick={() =>
+          window.open("https://forms.gle/bNprjEaHwV5bSkSd9", "_blank")
+        }
+      >
+        의견 제시하기
+      </button>
     </div>
   );
 };
