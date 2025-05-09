@@ -37,7 +37,7 @@ export const Jaeyeon = () => {
         />
 
         {/* Cherring button */}
-        <button className="flex justify-center items-center min-h-10 gap-x-2 bg-rose-500 rounded-xl">
+        <button className="flex justify-center items-center min-h-10 gap-x-2 bg-main-500 rounded-xl">
           <img src={whiteLove} alt="love" />
           <div
             className="text-[16px] text-white font-medium"
