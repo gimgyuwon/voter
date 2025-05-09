@@ -43,7 +43,7 @@ export const Ranking = () => {
       <div className="text-[18px] font-semibold">실시간 응원 순위</div>
       {Object.entries(rankingList)?.map(([rank, candidate]) => (
         <div
-          className="relative w-full flex flex-row gap-x-4 items-center justify-between"
+          className="relative w-full flex flex-row gap-x-4 items-center justify-between bg-main-100 rounded-xl p-3"
           key={rank}
         >
           <div className="flex flex-row items-center gap-x-4">
@@ -51,7 +51,7 @@ export const Ranking = () => {
             <img
               src={candidate?.squareImg}
               alt="candidate"
-              className="rounded-xl justify-center w-[100px] bg-white"
+              className="rounded-xl justify-center w-[90px] bg-white"
             />
 
             {/* Rank badge */}
@@ -78,7 +78,7 @@ export const Ranking = () => {
 
           {/* cheer button */}
           <button
-            className="bg-rose-500 rounded-full flex flex-row space-x-2 px-3 min-h-12 items-center"
+            className="bg-main-500 rounded-full flex flex-row space-x-2 px-3 min-h-12 items-center"
             onClick={() => handleCheer(candidate.name)}
           >
             <img src={whiteLove} alt="whiteLove" />
