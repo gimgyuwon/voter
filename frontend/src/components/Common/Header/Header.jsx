@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CandidateSelect } from "./CandidateSelect/CandiateSelect";
 import bookmarker from "../../../assets/icons/bookmarker.svg";
 import focusBookmarker from "../../../assets/icons/focusBookmarker.svg";
-import darkMode from "../../../assets/icons/darkMode.svg";
+// import darkMode from "../../../assets/icons/darkMode.svg";
+import brush from "../../../assets/icons/brush.svg";
+import ThemeModal from "../ThemeModal/ThemeModal";
 
 export const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isActive = location.pathname == "/bookmark";
+  const isActive = location.pathname === "/bookmark";
+  const [themeOpen, setThemeOpen] = useState(false);
+
   const handleTitleClick = () => {
     navigate("/");
   };
@@ -31,11 +35,20 @@ export const Header = () => {
               height={15}
               onClick={() => handleBookmarkClick()}
             />
-            <img src={darkMode} alt="darkMode" width={35} height={35} />
+            <img
+              src={brush}
+              alt="pallete"
+              width={20}
+              height={20}
+              onClick={() => setThemeOpen(true)}
+            />
           </div>
         </div>
       </div>
       <CandidateSelect />
+
+      {/* Theme Open  Modal */}
+      {themeOpen && <ThemeModal setThemeOpen={setThemeOpen} />}
     </>
   );
 };

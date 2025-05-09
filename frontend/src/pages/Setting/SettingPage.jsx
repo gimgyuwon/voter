@@ -18,7 +18,7 @@ export const SettingPage = () => {
     navigate("/");
   };
 
-  if (!user) {
+  if (!!user) {
     return (
       <AlertModal
         message="로그인이 필요한 화면입니다"
