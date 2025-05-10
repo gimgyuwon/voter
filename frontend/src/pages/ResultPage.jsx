@@ -1,12 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import Result from "../components/result/Result";
 
 export const ResultPage = () => {
   const location = useLocation();
-  const { ideology, policyMatch } = location.state || {};
+  const { ideologyScore, categoryScore, policyMatch, top3 } =
+    location.state || {};
 
-  return <Result ideology={ideology} policyMatch={policyMatch} />;
+  return (
+    <Result
+      ideologyScore={ideologyScore}
+      categoryScore={categoryScore}
+      policyMatch={policyMatch}
+      top3={top3}
+    />
+  );
 };
 
 export default ResultPage;
