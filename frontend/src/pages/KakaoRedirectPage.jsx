@@ -19,10 +19,10 @@ export const KakaoRedirectPage = () => {
         localStorage.setItem("access_token", accessToken);
         localStorage.setItem("refresh_token", refreshToken);
 
-        const { nickname, ideology, policyMatch, bookmarks } =
+        const { nickname, ideologyScore, policyMatch, bookmarks } =
           await fetchUserInfo(accessToken);
         localStorage.setItem("nickname", nickname);
-        localStorage.setItem("ideology", ideology);
+        localStorage.setItem("ideologyScore", ideologyScore);
         localStorage.setItem("policyMatch", policyMatch);
         localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 
@@ -31,7 +31,7 @@ export const KakaoRedirectPage = () => {
           user: { nickname },
           accessToken,
           refreshToken,
-          testResult: { ideology, policyMatch },
+          testResult: { ideologyScore, policyMatch },
           bookmarks,
         });
 

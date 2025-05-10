@@ -6,6 +6,7 @@ import Profile from "../../components/Setting/Profile/Profile";
 import Info from "../../components/Setting/Info/Info";
 import PolicyTest from "../../components/Home/PolicyTest/PolicyTest";
 import { useNavigate } from "react-router-dom";
+import getLabel from "../../utils/getLabel";
 
 export const SettingPage = () => {
   const { user, bookmarks, testResult, logout } = useAuthStore();
@@ -54,7 +55,7 @@ export const SettingPage = () => {
       {/* 2nd row: Info */}
       <Info
         bookmarksCnt={bookmarks.length}
-        ideology={testResult?.ideology}
+        ideology={getLabel(testResult?.ideologyScore)}
         cheerCandidate={testResult?.cheerCandidate}
         policyMatch={testResult?.policyMatch}
       />
