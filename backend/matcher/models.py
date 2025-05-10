@@ -7,8 +7,11 @@ class User(AbstractUser):
     username = models.CharField(max_length=150, unique=True)
     nickname = models.CharField(max_length=100)
 
-    ideology = models.CharField(max_length=20, null=True, blank=True)
-    policy_match = models.CharField(max_length=50, null=True, blank=True)
+    ideology_score = models.FloatField(null=True, blank=True)
+    category_score = models.JSONField(null=True, blank=True)
+    policy_match = models.CharField(max_length=100, null=True, blank=True)
+    top3 = models.JSONField(null=True, blank=True) 
+    bookmarks = models.JSONField(default=list, blank=True)
 
     bookmarks = models.JSONField(default=list, blank=True)
 
