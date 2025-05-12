@@ -11,7 +11,6 @@ export const CHIP_OPTION = [
   "행정/개혁",
   "교통",
   "ETF/세금",
-  "전•월세",
   "기업친화",
   "지역균형",
 ];
@@ -29,7 +28,7 @@ export const CHIP_STYLE = {
   "행정/개혁": "bg-rose-200 text-black",
   교통: "bg-red-200 text-black",
   "ETF/세금": "bg-emerald-200 text-black",
-  "전•월세": "bg-amber-200 text-black",
+  // "전•월세": "bg-amber-200 text-black",
   기업친화: "bg-pink-200 text-black",
   지역균형: "bg-orange-200 text-black",
 };
