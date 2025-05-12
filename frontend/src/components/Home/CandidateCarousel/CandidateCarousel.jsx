@@ -42,7 +42,10 @@ export const CandidateCarousel = () => {
       >
         &lt;
       </button>
-      <button className="absolute top-1/2 right-0 transform -translate-y-1/2 p-4 rounded-full">
+      <button
+        onClick={() => handleSlide(1)}
+        className="absolute top-1/2 right-0 transform -translate-y-1/2 p-4 rounded-full"
+      >
         &gt;
       </button>
     </div>
