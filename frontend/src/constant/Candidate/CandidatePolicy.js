@@ -244,7 +244,7 @@ export const CANDIDATE_POLICY = [
     title: "법인세•상속세 인하",
     content: "법인세 최고 세율 24% → 21% \n 상속세 50% → 30%",
     prop: ["기업친화", "ETF/세금", "4050"],
-    main: false,
+    main: true,
     candidate: "김문수",
   },
   {
@@ -344,7 +344,7 @@ export const CANDIDATE_POLICY = [
   },
   {
     id: 41,
-    title: "국회의원 불체포 특권 폐지지",
+    title: "국회의원 불체포 특권 폐지",
     content: "국회의원 불체포 특권 및 공수처 폐지 \n 선관위 감사원 감사 허용",
     prop: ["행정/개혁"],
     main: false,
