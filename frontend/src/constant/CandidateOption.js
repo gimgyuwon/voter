@@ -1,18 +1,12 @@
 import jaemyeong from "../assets/images/jaemyeong.png";
 import munsu from "../assets/images/munsu.png";
-import jaeyeon from "../assets/images/jaeyeon.png";
 import junseok from "../assets/images/junseok.png";
-import nakyeon from "../assets/images/nakyeon.png";
 import jaemyeongSquare from "../assets/images/jaemyeongSquare.png";
-import jaeyeonSquare from "../assets/images/jaeyeonSquare.png";
 import junseokSquare from "../assets/images/junseokSquare.png";
-import nakyeonSquare from "../assets/images/nakyeonSquare.png";
 import munsuSquare from "../assets/images/munsuSquare.png";
 import jaemyeongTransparent from "../assets/images/jaemyeongTransparent.png";
 import munsuTransparent from "../assets/images/munsuTransparent.png";
-import jaeyeonTransparent from "../assets/images/jaeyeonTransparent.png";
 import junseokTransparent from "../assets/images/junseokTransparent.png";
-import nakyeonTransparent from "../assets/images/nakyeonTransparent.png";
 
 export const CANDIDATE_OPTION = [
   {
@@ -44,26 +38,6 @@ export const CANDIDATE_OPTION = [
     image: junseok,
     squareImg: junseokSquare,
     transparentImg: junseokTransparent,
-  },
-  {
-    value: "김재연",
-    label: "김재연",
-    party: "진보당",
-    color: "#D6001C",
-    link: "/candidate/jaeyeon",
-    image: jaeyeon,
-    squareImg: jaeyeonSquare,
-    transparentImg: jaeyeonTransparent,
-  },
-  {
-    value: "이낙연",
-    label: "이낙연",
-    party: "새미래민주당",
-    color: "#51BDC5",
-    link: "/candidate/nakyeon",
-    image: nakyeon,
-    squareImg: nakyeonSquare,
-    transparentImg: nakyeonTransparent,
   },
 ];
 

@@ -10,8 +10,6 @@ import CandidatePage from "../pages/Candidate/CandidatePage";
 import Jaemyeong from "../pages/Candidate/Jaemyeong/Jaemyeong";
 import Munsu from "../pages/Candidate/Munsu/Munsu";
 import Junseok from "../pages/Candidate/Junseok/Junseok";
-import Jaeyeon from "../pages/Candidate/Jaeyeon/Jaeyeon";
-import Nakyeon from "../pages/Candidate/Nakyeon/Nakyeon";
 import KakaoRedirectPage from "../pages/KakaoRedirectPage";
 import CreditsPage from "../pages/CreditPage/CreditPage";
 
@@ -36,8 +34,6 @@ const AppRouter = () => {
           <Route path="jaemyeong" element={<Jaemyeong />} />
           <Route path="munsu" element={<Munsu />} />
           <Route path="junseok" element={<Junseok />} />
-          <Route path="jaeyeon" element={<Jaeyeon />} />
-          <Route path="nakyeon" element={<Nakyeon />} />
         </Route>
       </Routes>
     </div>
