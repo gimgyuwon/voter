@@ -1,4 +1,3 @@
-import React from "react";
 import star from "../../../assets/icons/star.svg";
 import { ReactComponent as BookmarkerIcon } from "../../../assets/icons/bookmarker.svg";
 import { ReactComponent as FocusBookmarkerIcon } from "../../../assets/icons/focusBookmarker.svg";
@@ -48,6 +47,9 @@ export const MainPolicy = ({ policy }) => {
               </div>
               <div className="text-[14px] whitespace-pre-line">
                 {policy.content}
+              </div>
+              <div className="text-[14px] text-blue-500 pt-2">
+                상세보기 &gt;
               </div>
             </div>
           );

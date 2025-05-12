@@ -80,9 +80,9 @@ export const SubPolicy = ({ policy, compare = false }) => {
               <div className="text-[14px] whitespace-pre-line">
                 {policy.content}
               </div>
-              <div className="text-[14px] text-blue-500 pt-2">
+              {/* <div className="text-[14px] text-blue-500 pt-2">
                 상세보기 &gt;
-              </div>
+              </div> */}
             </div>
           );
         })}
