@@ -17,12 +17,14 @@ export const AlertModal = ({
         <div className="text-gray-800 text-base mb-4">{message}</div>
         {/* confirm button */}
         <div className="w-full flex flex-row gap-x-2">
-          <button
-            onClick={onButtonClick}
-            className="w-full justify-center mt-2 px-4 py-2 bg-main-500 text-white rounded-xl"
-          >
-            {buttonMessage}
-          </button>
+          {buttonMessage && (
+            <button
+              onClick={onButtonClick}
+              className="w-full justify-center mt-2 px-4 py-2 bg-main-500 text-white rounded-xl"
+            >
+              {buttonMessage}
+            </button>
+          )}
           {secondButtonMessage && (
             <button
               onClick={onSecondButtonClick}

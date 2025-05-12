@@ -1,7 +1,7 @@
 import React from "react";
 import star from "../../../assets/icons/star.svg";
-import bookmarker from "../../../assets/icons/bookmarker.svg";
-import focusBookmarker from "../../../assets/icons/focusBookmarker.svg";
+import { ReactComponent as BookmarkerIcon } from "../../../assets/icons/bookmarker.svg";
+import { ReactComponent as FocusBookmarkerIcon } from "../../../assets/icons/focusBookmarker.svg";
 import useAuthStore from "../../../store/useAuthStore";
 
 export const MainPolicy = ({ policy }) => {
@@ -26,13 +26,21 @@ export const MainPolicy = ({ policy }) => {
               className="relative flex flex-col justify-center w-full min-h-[86px] rounded-xl border-2 border-gray-200 p-3"
             >
               {/* bookmark button */}
-              <img
-                src={isBookmarked ? focusBookmarker : bookmarker}
-                alt={isBookmarked ? "focusBookmarker" : "bookmarker"}
-                width={13}
-                className="absolute top-4 right-4"
-                onClick={() => toggleBookmark(policy.id)}
-              />
+              {isBookmarked ? (
+                <FocusBookmarkerIcon
+                  alt="FocusBookmarkerIcon"
+                  width={13}
+                  className="absolute top-4 right-4 text-main-500"
+                  onClick={() => toggleBookmark(policy.id)}
+                />
+              ) : (
+                <BookmarkerIcon
+                  alt="BookmarkerIcon"
+                  width={13}
+                  className="absolute top-4 right-4 text-sub-500"
+                  onClick={() => toggleBookmark(policy.id)}
+                />
+              )}
 
               {/* policy content */}
               <div className="text-[16px] flex flex-row justify-between items-end">

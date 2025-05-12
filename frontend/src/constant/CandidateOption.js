@@ -8,6 +8,11 @@ import jaeyeonSquare from "../assets/images/jaeyeonSquare.png";
 import junseokSquare from "../assets/images/junseokSquare.png";
 import nakyeonSquare from "../assets/images/nakyeonSquare.png";
 import munsuSquare from "../assets/images/munsuSquare.png";
+import jaemyeongTransparent from "../assets/images/jaemyeongTransparent.png";
+import munsuTransparent from "../assets/images/munsuTransparent.png";
+import jaeyeonTransparent from "../assets/images/jaeyeonTransparent.png";
+import junseokTransparent from "../assets/images/junseokTransparent.png";
+import nakyeonTransparent from "../assets/images/nakyeonTransparent.png";
 
 export const CANDIDATE_OPTION = [
   {
@@ -18,6 +23,7 @@ export const CANDIDATE_OPTION = [
     link: "/candidate/jaemyeong",
     image: jaemyeong,
     squareImg: jaemyeongSquare,
+    transparentImg: jaemyeongTransparent,
   },
   {
     value: "김문수",
@@ -27,6 +33,7 @@ export const CANDIDATE_OPTION = [
     link: "/candidate/munsu",
     image: munsu,
     squareImg: munsuSquare,
+    transparentImg: munsuTransparent,
   },
   {
     value: "이준석",
@@ -36,6 +43,7 @@ export const CANDIDATE_OPTION = [
     link: "/candidate/junseok",
     image: junseok,
     squareImg: junseokSquare,
+    transparentImg: junseokTransparent,
   },
   {
     value: "김재연",
@@ -45,6 +53,7 @@ export const CANDIDATE_OPTION = [
     link: "/candidate/jaeyeon",
     image: jaeyeon,
     squareImg: jaeyeonSquare,
+    transparentImg: jaeyeonTransparent,
   },
   {
     value: "이낙연",
@@ -54,6 +63,7 @@ export const CANDIDATE_OPTION = [
     link: "/candidate/nakyeon",
     image: nakyeon,
     squareImg: nakyeonSquare,
+    transparentImg: nakyeonTransparent,
   },
 ];
 

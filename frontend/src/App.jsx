@@ -16,6 +16,7 @@ function App() {
     const ideology = localStorage.getItem("ideology");
     const policyMatch = localStorage.getItem("policyMatch");
     const bookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+    const theme = localStorage.getItem("theme" || "green");
 
     if (accessToken && refreshToken && nickname) {
       login({
@@ -24,7 +25,10 @@ function App() {
         refreshToken,
         testResult: { ideology, policyMatch },
         bookmarks,
+        theme,
       });
+
+      useAuthStore.getState().setTheme(theme);
     }
   }, [login]);
 

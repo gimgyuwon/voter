@@ -27,23 +27,22 @@ export const CandidateCarousel = () => {
 
   return (
     <div className="relative w-full">
-      <img
-        src={CANDIDATE_OPTION[idx].image}
-        alt={`Slide ${idx}`}
-        onClick={handleImgClick}
-        className="w-full h-[150px] object-contain cursor-pointer"
-      />
+      <div className="relative w-full h-[150px] flex items-center justify-center rounded-xl">
+        <img
+          src={CANDIDATE_OPTION[idx].transparentImg}
+          alt={`Slide ${idx}`}
+          onClick={handleImgClick}
+          className="w-full h-full object-contain"
+        />
+      </div>
 
       <button
         onClick={() => handleSlide(-1)}
-        className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/70 p-2 rounded-full"
+        className="absolute top-1/2 left-0 transform -translate-y-1/2 p-4 rounded-full"
       >
         &lt;
       </button>
-      <button
-        onClick={() => handleSlide(1)}
-        className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white/70 p-2 rounded-full"
-      >
+      <button className="absolute top-1/2 right-0 transform -translate-y-1/2 p-4 rounded-full">
         &gt;
       </button>
     </div>

@@ -5,7 +5,7 @@ import CandidateCarousel from "../components/Home/CandidateCarousel/CandidateCar
 
 export const HomePage = () => {
   return (
-    <div className="pb-5">
+    <div className="pb-5 gap-y-4">
       <CandidateCarousel />
       <PolicyCard />
       <PolicyTest />
@@ -25,7 +25,7 @@ export const HomePage = () => {
           href="https://forms.gle/bNprjEaHwV5bSkSd9"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 underline"
+          className="text-main-700 underline"
         >
           의견 제시하기
         </a>

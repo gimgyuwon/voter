@@ -2,6 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-main-100: 232 249 238;
+  --color-main-300: 167 243 208;
+  --color-main-500: 52 211 153;
+  --color-main-700: 5 150 105;
+}
+
+.theme-red {
+  --color-main-100: 255 240 242;
+  --color-main-300: 255 178 188;
+  --color-main-500: 244 63 94;
+  --color-main-700: 190 24 58;
+}
+
+.theme-yellow {
+  --color-main-100: 255 251 235;
+  --color-main-300: 253 230 138;
+  --color-main-500: 250 204 21;
+  --color-main-700: 202 138 4;
+}
+
+.theme-black {
+  --color-main-100: 245 245 245;
+  --color-main-300: 200 200 200;
+  --color-main-500: 120 120 120;
+  --color-main-700: 60 60 60;
+}
+
+.theme-blue {
+  --color-main-100: 235 248 255;
+  --color-main-300: 147 197 253;
+  --color-main-500: 96 165 250;
+  --color-main-700: 37 99 235;
+}
+
+.theme-purple {
+  --color-main-100: 245 240 255;
+  --color-main-300: 196 181 253;
+  --color-main-500: 139 92 246;
+  --color-main-700: 109 40 217;
+}
+
+.theme-brown {
+  --color-main-100: 245 241 235;
+  --color-main-300: 214 191 164;
+  --color-main-500: 168 108 50;
+  --color-main-700: 120 72 33;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

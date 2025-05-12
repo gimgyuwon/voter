@@ -1,46 +1,42 @@
 import React from "react";
 import CANDIDATE_OPTION from "../../constant/CandidateOption";
-import { Link } from "react-router-dom";
+import MatchingRate from "./MatchingRate";
+import BestMatch from "./BestMatch";
+import BiasSpectrum from "./BiasSpectrum";
+import Title from "./Title";
+import CategoryScore from "./CategoryScore";
+import getLabel from "../../utils/getLabel";
+import getIdeologyColor from "../../utils/getIdeologyColor";
 
-export const Result = ({ ideology, policyMatch }) => {
+export const Result = ({ ideologyScore, categoryScore, policyMatch, top3 }) => {
   const candidate = CANDIDATE_OPTION.find((c) => c.value === policyMatch);
 
-  return ideology && candidate ? (
-    <div className="flex flex-col h-full justify-center pb-5 items-center text-center space-y-4">
-      {/* 후보자 이미지 */}
-      <img src={candidate.image} alt={candidate.label} className="w-full" />
+  return ideologyScore && candidate ? (
+    <div className="flex flex-col items-center space-y-6 max-w-xl text-center pb-10">
+      {/* 정치 성향 결과 */}
+      <div className="space-y-5 w-full">
+        {/* 타이틀 개요 */}
+        <Title
+          getIdeologyColor={getIdeologyColor}
+          getLabel={getLabel}
+          ideologyScore={ideologyScore}
+        />
 
-      {/* 정치 성향 */}
-      <div className="text-[20px] font-semibold">당신의 정치 성향 결과</div>
-      <p>
-        당신은
-        <strong className="bg-gray-800 text-white px-1 py-[1px] m-1">
-          {ideology}
-        </strong>
-        성향 입니다.
-      </p>
+        {/* 성향 스펙트럼 */}
+        <BiasSpectrum
+          ideologyScore={ideologyScore}
+          getIdeologyColor={getIdeologyColor}
+        />
+      </div>
 
-      {/* 공약 일치 후보자 */}
-      <p className="pb-2">
-        당신의 가치관에 가장 일치하는 <br />
-        공약을 제시한 후보는 <br />
-        <strong
-          className="p-1 py-[1px] m-1 text-white"
-          style={{ backgroundColor: candidate.color }}
-        >
-          {candidate.label}
-        </strong>
-        입니다.
-      </p>
+      {/* 후보 일치 결과 */}
+      <BestMatch candidate={candidate} />
 
-      {/* 공약 보러가기 링크 */}
-      <Link
-        to={candidate.link}
-        className="mt-2 px-4 py-2 rounded-xl text-white font-semibold"
-        style={{ backgroundColor: candidate.color }}
-      >
-        {candidate.label} 후보 공약 보러 가기 →
-      </Link>
+      {/* 상위 3명 매칭률 */}
+      <MatchingRate top3={top3} />
+
+      {/* 카테고리 점수 */}
+      <CategoryScore categoryScore={categoryScore} />
     </div>
   ) : (
     <div className="flex flex-col h-full justify-center items-center">

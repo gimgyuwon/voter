@@ -8,15 +8,12 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 import math
 
-
-# Create your views here.
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
     return {
         'refresh': str(refresh),
         'access': str(refresh.access_token),
     }
-
 
 @api_view(['POST'])
 def kakao_login(request):
@@ -71,8 +68,10 @@ def kakao_login(request):
             'access_token': tokens['access'],
             'refresh_token': tokens['refresh'],
             'nickname': user.nickname,
-            'ideology': user.ideology,
+            'ideologyScore': user.ideology_score,
+            'categoryScore': user.category_score,
             'policyMatch': user.policy_match,
+            'top3': user.top3,
         })
     
     except requests.exceptions.RequestException as e:
@@ -82,10 +81,62 @@ def kakao_login(request):
 
 # 후보자 벡터
 CANDIDATE_VECTORS = {
-    "이재명": [5, 2, 5, 2, 4, 3, 5, 4, 5, 2, 2, 2, 3, 5, 5],
-    "김재연": [5, 1, 5, 1, 5, 1, 5, 5, 5, 1, 1, 1, 3, 5, 5],
-    "김문수": [2, 5, 2, 5, 2, 5, 3, 2, 2, 5, 5, 5, 4, 2, 2],
-    "이준석": [3, 4, 3, 4, 3, 4, 3, 3, 3, 4, 4, 4, 5, 3, 3],
+    "김문수": [
+            # 1-5
+            3, 5, 2, 4, 1, 
+            # 6-10
+            5, 3, 1, 2, 2, 
+            # 11-15
+            5, 5, 2, 2, 3, 
+            # 16-20
+            1, 1, 2, 1, 1, 
+            # 21-25
+            2, 5, 1, 2, 2
+            ],
+    "이준석": [
+            # 1-5
+            2, 4, 3, 3, 3, 
+            # 6-10
+            4, 2, 3, 3, 2, 
+            # 11-15
+            3, 3, 4, 5, 5, 
+            # 16-20
+            4, 2, 4, 4, 3, 
+            # 21-25
+            3, 4, 3, 5, 5
+            ],
+    "이재명": [
+            # 1-5
+            4, 3, 5, 2, 4, 
+            # 5-10
+            2, 4, 4, 4, 3, 
+            # 11-15
+            2, 2, 5, 5, 3, 
+            # 16-20
+            4, 4, 5, 5, 4, 
+            # 21-25
+            4, 3, 4, 3, 4
+            ],
+    "김재연": [
+            # 1-5
+            5, 1, 5, 1, 5, 
+            # 5-10
+            1, 5, 5, 5, 5, 
+            # 11-15
+            1, 1, 2, 5, 3, 
+            # 16-20
+            5, 5, 2, 4, 5, 
+            # 21-25
+            5, 2, 5, 2, 5
+            ],
+}
+
+# 카테고리별 질문 인덱스 (0부터 시작)
+CATEGORY_INDICES = {
+    "복지·노동": [2, 7, 8, 13, 15, 18, 19, 22],
+    "경제·산업": [1, 3, 17],
+    "안보·국방": [5, 9, 10, 11, 21],
+    "소수자·인권": [0, 4, 6, 16, 20, 24],
 }
 
 # 코사인 유사도 함수
@@ -95,69 +146,64 @@ def cosine_similarity(v1, v2):
     norm2 = math.sqrt(sum(b ** 2 for b in v2))
     return dot / (norm1 * norm2) if norm1 and norm2 else 0
 
-# 정치 성향 분류 함수
-def classify_ideology(user_vector):
-    # 진보 성향: q1, q3, q5, q8, q9, q14, q15
-    # 보수 성향: q2, q4, q6, q10, q11, q12
-    # 중도 관련 q13은 제외
+# 정치 성향 점수 계산 (0: 강보수 ~ 10: 강진보)
+def calculate_ideology_score(user_vector):
+    progressive_indices = [0, 2, 4, 6, 7, 8, 12, 13, 15, 16, 17,18,  19, 20, 22, 24]
+    conservative_indices = [1, 3, 5, 9, 10, 11, 14, 21, 23]
 
-    progressive_indices = [0, 2, 4, 7, 8, 13, 14]
-    conservative_indices = [1, 3, 5, 9, 10, 11]
+    prog_score = sum(user_vector[i] for i in progressive_indices)
+    cons_score = sum(6 - user_vector[i] for i in conservative_indices)
+    total_score = prog_score + cons_score
+    return round((total_score / (len(progressive_indices) + len(conservative_indices))) * 2, 1)
 
-    progressive_score = sum(user_vector[i] for i in progressive_indices)
-    conservative_score = sum(6 - user_vector[i] for i in conservative_indices)
-    total_score = progressive_score + conservative_score
-    ideology_score = total_score / (len(progressive_indices) + len(conservative_indices))
+# 카테고리별 점수 계산
+def calculate_category_scores(user_vector):
+    result = {}
+    for cat, indices in CATEGORY_INDICES.items():
+        score = sum(user_vector[i] for i in indices) / len(indices)
+        result[cat] = round(score, 2)
+    return result
 
-    if ideology_score >= 4.5:
-        return "강한 진보"
-    elif ideology_score >= 3.5:
-        return "약한 진보"
-    elif ideology_score >= 2.5:
-        return "중도"
-    elif ideology_score >= 1.5:
-        return "약한 보수"
-    else:
-        return "강한 보수"
 
 @api_view(['POST'])
 def calculate_match(request):
     data = request.data
+    question_keys = [f"q{i}" for i in range(1, 26)]
+    user_vector = [data.get(k, 3) for k in question_keys]
 
-    # 사용자 응답 벡터 생성
-    question_keys = [f"q{i}" for i in range(1, 16)]
-    user_vector = [data.get(k, 3) for k in question_keys]  # 응답 없으면 중립값 3
-
-    # 정치 성향 계산
-    ideology = classify_ideology(user_vector)
-
-    # 유사도 계산
     similarities = {
         name: cosine_similarity(user_vector, vector)
         for name, vector in CANDIDATE_VECTORS.items()
     }
-
     sorted_candidates = sorted(similarities.items(), key=lambda x: x[1], reverse=True)
     best_match = sorted_candidates[0][0]
 
     return Response({
-        "ideology": ideology,
+        "ideologyScore": calculate_ideology_score(user_vector),
+        "categoryScore": calculate_category_scores(user_vector),
         "policyMatch": best_match,
-        # "similarities": similarities,
+        "top3": [
+            {"name": name, "score": round(score * 100, 1)}
+            for name, score in sorted_candidates[:3]
+        ]
     })
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def save_test_result(request):
-    ideology = request.data.get("ideology")
+    user = request.user
+    ideology_score = request.data.get("ideologyScore")
+    category_score = request.data.get("categoryScore")
     policy_match = request.data.get("policyMatch")
+    top3 = request.data.get("top3")
 
-    if not (ideology and policy_match):
+    if ideology_score is None or not policy_match or policy_match is None or top3 is None:
         return Response({"error": "Invalid data"}, status=400)
 
-    user = request.user
-    user.ideology = ideology
+    user.ideology_score = ideology_score
+    user.category_score = category_score
     user.policy_match = policy_match
+    user.top3 = top3
     user.save()
 
     return Response({"success": True})
@@ -168,8 +214,10 @@ def user_info(request):
     user = request.user
     return Response({
         "nickname": user.nickname,
-        "ideology": user.ideology,
+        "ideologyScore": user.ideology_score,
+        "categoryScore": user.category_score,
         "policyMatch": user.policy_match,
+        "top3": user.top3,
         "bookmarks": user.bookmarks,
     })
 

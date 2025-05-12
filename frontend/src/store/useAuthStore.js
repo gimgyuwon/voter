@@ -6,15 +6,24 @@ const useAuthStore = create((set, get) => ({
   refreshToken: null,
   bookmarks: [],
   testResult: null,
+  theme: null,
 
   /** 로그인 처리 */
-  login: ({ user, accessToken, refreshToken, testResult, bookmarks = [] }) =>
+  login: ({
+    user,
+    accessToken,
+    refreshToken,
+    testResult,
+    bookmarks = [],
+    theme,
+  }) =>
     set({
       user,
       accessToken,
       refreshToken,
       testResult,
       bookmarks,
+      theme,
     }),
 
   /** 로그아웃 처리 */
@@ -25,6 +34,7 @@ const useAuthStore = create((set, get) => ({
       refreshToken: null,
       bookmarks: [],
       testResult: null,
+      theme: null,
     }),
 
   /** 북마크 추가/제거 toggle */
@@ -40,6 +50,27 @@ const useAuthStore = create((set, get) => ({
 
   /** 성향 테스트 결과 수동 업데이트 */
   setTestResult: (testResult) => set({ testResult }),
+
+  /** 테마 컬러 관리 */
+  setTheme: (themeName) => {
+    localStorage.setItem("theme", themeName);
+    const root = document.documentElement;
+    root.classList.remove(
+      "theme-red",
+      "theme-yellow",
+      "theme-green",
+      "theme-blue",
+      "theme-purple",
+      "theme-brown",
+      "theme-black"
+    );
+
+    if (themeName !== "green") {
+      root.classList.add(`theme-${themeName}`);
+    }
+
+    set({ theme: themeName });
+  },
 
   /** refreshtoken 자동 갱신 */
   getValidAccessToken: async () => {

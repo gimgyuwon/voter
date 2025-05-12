@@ -5,13 +5,13 @@ module.exports = {
     extend: {
       colors: {
         main: {
-          100: "#EFF6FF",
-          300: "#BFDBFE",
-          500: "#3B82F6",
-          700: "#2563EB",
+          100: "rgb(var(--color-main-100) / <alpha-value>)",
+          300: "rgb(var(--color-main-300) / <alpha-value>)",
+          500: "rgb(var(--color-main-500) / <alpha-value>)",
+          700: "rgb(var(--color-main-700) / <alpha-value>)",
         },
         sub: {
-          100: "#F9FAFB",
+          100: "#FCFCFD",
           300: "#E5E7EB",
           500: "#6B7280",
         },

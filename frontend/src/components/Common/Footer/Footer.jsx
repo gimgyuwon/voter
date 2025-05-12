@@ -7,8 +7,8 @@ export const Footer = () => {
       {FOOTER_ICON_LIST.map((item, idx) => (
         <FooterItem
           key={idx}
-          icon={item.icon}
-          focusIcon={item.focusIcon}
+          IconComponent={item.IconComponent}
+          FocusIconComponent={item.FocusIconComponent}
           label={item.label}
           link={item.link}
           iconWidth={item.iconWidth}
