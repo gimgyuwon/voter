@@ -82,61 +82,37 @@ def kakao_login(request):
 # 후보자 벡터
 CANDIDATE_VECTORS = {
     "김문수": [
-            # 1-5
-            3, 5, 2, 4, 1, 
-            # 6-10
-            5, 3, 1, 2, 2, 
-            # 11-15
-            5, 5, 2, 2, 3, 
-            # 16-20
-            1, 1, 2, 1, 1, 
-            # 21-25
-            2, 5, 1, 2, 2
+            #13-17
+            1, 3, 3, 3, 3,
+            #18-21
+            1, 2, 4, 4, 
+            #22-25
+            5, 5, 5, 5,
             ],
     "이준석": [
-            # 1-5
-            2, 4, 3, 3, 3, 
-            # 6-10
-            4, 2, 3, 3, 2, 
-            # 11-15
-            3, 3, 4, 5, 5, 
-            # 16-20
-            4, 2, 4, 4, 3, 
-            # 21-25
-            3, 4, 3, 5, 5
+            #13-17
+            5, 5, 5, 5, 5,
+            #18-21
+            1, 3, 3, 3,
+            #22-25
+            1, 3, 3, 3,
             ],
     "이재명": [
-            # 1-5
-            4, 3, 5, 2, 4, 
-            # 5-10
-            2, 4, 4, 4, 3, 
-            # 11-15
-            2, 2, 5, 5, 3, 
-            # 16-20
-            4, 4, 5, 5, 4, 
-            # 21-25
-            4, 3, 4, 3, 4
-            ],
-    "김재연": [
-            # 1-5
-            5, 1, 5, 1, 5, 
-            # 5-10
-            1, 5, 5, 5, 5, 
-            # 11-15
-            1, 1, 2, 5, 3, 
-            # 16-20
-            5, 5, 2, 4, 5, 
-            # 21-25
-            5, 2, 5, 2, 5
+            #13-17
+            3, 3, 3, 4, 3,
+            #18-21
+            5, 5, 5, 5,
+            #22-25
+            4, 4, 3, 3,
             ],
 }
 
 # 카테고리별 질문 인덱스 (0부터 시작)
 CATEGORY_INDICES = {
-    "복지·노동": [2, 7, 8, 13, 15, 18, 19, 22],
-    "경제·산업": [1, 3, 17],
-    "안보·국방": [5, 9, 10, 11, 21],
-    "소수자·인권": [0, 4, 6, 16, 20, 24],
+    "복지·노동": [0, 2, ],
+    "경제·산업": [-1, -7, 8, ],
+    "안보·국방": [-3, -5, -9, ],
+    "소수자·인권": [4, 6, 10, -11],
 }
 
 # 코사인 유사도 함수
@@ -147,40 +123,51 @@ def cosine_similarity(v1, v2):
     return dot / (norm1 * norm2) if norm1 and norm2 else 0
 
 # 정치 성향 점수 계산 (0: 강보수 ~ 10: 강진보)
-def calculate_ideology_score(user_vector):
-    progressive_indices = [0, 2, 4, 6, 7, 8, 12, 13, 15, 16, 17,18,  19, 20, 22, 24]
-    conservative_indices = [1, 3, 5, 9, 10, 11, 14, 21, 23]
+def calculate_ideology_score(ideology_vector):
+    progressive_indices = [0, 2, 4, 6, 8, 10]
+    conservative_indices = [1, 3, 5, 7, 9, 11]
 
-    prog_score = sum(user_vector[i] for i in progressive_indices)
-    cons_score = sum(6 - user_vector[i] for i in conservative_indices)
+    prog_score = sum(ideology_vector[i] for i in progressive_indices)
+    cons_score = sum(6 - ideology_vector[i] for i in conservative_indices)
     total_score = prog_score + cons_score
     return round((total_score / (len(progressive_indices) + len(conservative_indices))) * 2, 1)
 
 # 카테고리별 점수 계산
-def calculate_category_scores(user_vector):
+def calculate_category_scores(policy_vector):
     result = {}
     for cat, indices in CATEGORY_INDICES.items():
-        score = sum(user_vector[i] for i in indices) / len(indices)
-        result[cat] = round(score, 2)
+        values = []
+        for i in indices:
+            if i >= 0:
+                values.append(policy_vector[i])
+            else:
+                values.append(6 - policy_vector[abs(i)])
+        result[cat] = round(sum(values) / len(values), 2) if values else None
     return result
 
 
 @api_view(['POST'])
 def calculate_match(request):
     data = request.data
-    question_keys = [f"q{i}" for i in range(1, 26)]
-    user_vector = [data.get(k, 3) for k in question_keys]
+    # 전체 1~25 질문 벡터
+    full_vector = [data.get(f"q{i}", 3) for i in range(1, 26)]
+
+    # 정책 질문만 13~25 (0-indexed 기준으로 12~24)
+    policy_vector = full_vector[12:25]
+    # 이념 질문 1~12
+    ideology_vector = full_vector[0:12]
+
 
     similarities = {
-        name: cosine_similarity(user_vector, vector)
+        name: cosine_similarity(policy_vector, vector)
         for name, vector in CANDIDATE_VECTORS.items()
     }
     sorted_candidates = sorted(similarities.items(), key=lambda x: x[1], reverse=True)
     best_match = sorted_candidates[0][0]
 
     return Response({
-        "ideologyScore": calculate_ideology_score(user_vector),
-        "categoryScore": calculate_category_scores(user_vector),
+        "ideologyScore": calculate_ideology_score(ideology_vector),
+        "categoryScore": calculate_category_scores(policy_vector),
         "policyMatch": best_match,
         "top3": [
             {"name": name, "score": round(score * 100, 1)}
