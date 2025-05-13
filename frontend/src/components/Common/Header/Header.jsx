@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CandidateSelect } from "./CandidateSelect/CandiateSelect";
 import { ReactComponent as BookmarkerIcon } from "../../../assets/icons/bookmarker.svg";
 import { ReactComponent as FocusBookmarkerIcon } from "../../../assets/icons/focusBookmarker.svg";
-// import darkMode from "../../../assets/icons/darkMode.svg";
 import { ReactComponent as BrushIcon } from "../../../assets/icons/brush.svg";
 import ThemeModal from "../ThemeModal/ThemeModal";
 
