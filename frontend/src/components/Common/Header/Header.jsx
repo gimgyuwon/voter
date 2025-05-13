@@ -53,8 +53,8 @@ export const Header = () => {
             />
           </div>
         </div>
+        <CandidateSelect />
       </div>
-      <CandidateSelect />
 
       {/* Theme Open  Modal */}
       {themeOpen && <ThemeModal setThemeOpen={setThemeOpen} />}
