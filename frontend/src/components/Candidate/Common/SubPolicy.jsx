@@ -1,4 +1,3 @@
-import React from "react";
 import {
   CHIP_STYLE,
   CANDIDATE_CHIP_STYLE,
@@ -7,11 +6,31 @@ import { ReactComponent as BookmarkerIcon } from "../../../assets/icons/bookmark
 import { ReactComponent as FocusBookmarkerIcon } from "../../../assets/icons/focusBookmarker.svg";
 import useAuthStore from "../../../store/useAuthStore";
 import updateBookmark from "../../../api/bookmark";
+import AlertModal from "../../Common/AlertModal/AlertModal";
+import getKakaoAuthURL from "../../../utils/kakaoAuthUrl";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const SubPolicy = ({ policy, compare = false }) => {
-  const { bookmarks, toggleBookmark } = useAuthStore();
+  const { user, bookmarks, toggleBookmark } = useAuthStore();
+  const [alertModalOpen, setAlertModalOpen] = useState(false);
+
+  const handleLoginClick = () => {
+    window.location.href = getKakaoAuthURL();
+  };
+
+  const handleNextClick = () => {
+    setAlertModalOpen(false);
+  };
 
   const handleClickBookmark = async (id) => {
+    console.log("user", user);
+
+    if (!user) {
+      setAlertModalOpen(true);
+      return;
+    }
+
     try {
       await updateBookmark(id);
       toggleBookmark(id);
@@ -40,14 +59,14 @@ export const SubPolicy = ({ policy, compare = false }) => {
                   alt="FocusBookmarkerIcon"
                   width={13}
                   className="absolute top-4 right-4 text-main-500"
-                  onClick={() => toggleBookmark(policy.id)}
+                  onClick={() => handleClickBookmark(policy.id)}
                 />
               ) : (
                 <BookmarkerIcon
                   alt="BookmarkerIcon"
                   width={13}
                   className="absolute top-4 right-4 text-sub-500"
-                  onClick={() => toggleBookmark(policy.id)}
+                  onClick={() => handleClickBookmark(policy.id)}
                 />
               )}
 
@@ -87,6 +106,15 @@ export const SubPolicy = ({ policy, compare = false }) => {
           );
         })}
       </div>
+      {alertModalOpen && (
+        <AlertModal
+          message="공약을 북마크하려면 로그인해 주세요"
+          buttonMessage="로그인"
+          onButtonClick={handleLoginClick}
+          secondButtonMessage="나중에"
+          onSecondButtonClick={handleNextClick}
+        />
+      )}
     </div>
   );
 };

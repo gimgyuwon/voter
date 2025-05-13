@@ -218,7 +218,7 @@ export const CANDIDATE_POLICY = [
     candidate: "이재명",
   },
   {
-    id: 38,
+    id: 21,
     title: "가상자산 시장 제도화",
     content: "가상자산 현물 ETF 허용 \n 디지털자산육성기본법 제정",
     prop: ["행정/개혁", "2030", "4050"],
@@ -271,10 +271,10 @@ export const CANDIDATE_POLICY = [
   },
   {
     id: 32,
-    title: "기업 별 자율 정년 연장",
+    title: "기업별 자율 정년 연장",
     content:
       "기업 별 자율에 의한 정년 연장에는 동의, \n 모든 직무(산업)에 적용되는 일률적인 정년 연장에 대해서는 반대",
-    prop: ["노동자/복지", "기업친화", "2030", "4050"],
+    prop: ["노동자/복지", "기업친화", "2030"],
     main: false,
     candidate: "김문수",
   },
