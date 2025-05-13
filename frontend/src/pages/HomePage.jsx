@@ -2,8 +2,12 @@ import React from "react";
 import PolicyCard from "../components/Home/PolicyCard/PolicyCard";
 import PolicyTest from "../components/Home/PolicyTest/PolicyTest";
 import CandidateCarousel from "../components/Home/CandidateCarousel/CandidateCarousel";
+import Loading from "../components/Common/Loading/Loading";
 
 export const HomePage = () => {
+  if (true) {
+    return <Loading />;
+  }
   return (
     <div className="pb-5 gap-y-4">
       <CandidateCarousel />

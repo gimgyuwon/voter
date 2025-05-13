@@ -59,16 +59,6 @@ hr {
   display: none;
 }
 
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 5px solid #eee;
-  border-top: 5px solid #2563eb;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 16px;
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
