@@ -27,7 +27,7 @@ export const SettingPage = () => {
   if (!user) {
     return (
       <AlertModal
-        message="로그인이 필요한 화면입니다"
+        message="내 정보를 확인하시려면 로그인해 주세요"
         buttonMessage="로그인"
         onButtonClick={handleLoginClick}
         secondButtonMessage="나중에"
