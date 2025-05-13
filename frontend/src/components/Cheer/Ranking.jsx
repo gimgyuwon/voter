@@ -4,9 +4,15 @@ import whiteLove from "../../assets/icons/whiteLove.svg";
 import RANK_COLOR from "../../constant/RankingColor";
 import { cheerForCandidate, getCandidates } from "../../api/candidate";
 import CANDIDATE_OPTION from "../../constant/CandidateOption";
+import useAuthStore from "../../store/useAuthStore";
+import getKakaoAuthURL from "../../utils/kakaoAuthUrl";
+import { useNavigate } from "react-router-dom";
+import AlertModal from "../Common/AlertModal/AlertModal";
 
 export const Ranking = () => {
+  const { user } = useAuthStore();
   const [rankingList, setRankingList] = useState({});
+  const navigate = useNavigate();
 
   const fetchRanking = async () => {
     const list = await getCandidates();
@@ -36,6 +42,26 @@ export const Ranking = () => {
   useEffect(() => {
     fetchRanking();
   }, []);
+
+  const handleLoginClick = () => {
+    window.location.href = getKakaoAuthURL();
+  };
+
+  const handleNextClick = () => {
+    navigate("/");
+  };
+
+  if (!user) {
+    return (
+      <AlertModal
+        message="후보를 응원하시려면 로그인해 주세요"
+        buttonMessage="로그인"
+        onButtonClick={handleLoginClick}
+        secondButtonMessage="나중에"
+        onSecondButtonClick={handleNextClick}
+      />
+    );
+  }
 
   return (
     <div className="pb-5 space-y-6">
