@@ -14,8 +14,6 @@ export const CategoryScore = ({ categoryScore }) => {
         const barColor = getBarColor(delta);
         const label = delta === 0 ? "중도" : delta;
 
-        console.log(category, score, delta);
-
         return (
           <div key={category} className="space-y-1">
             <div className="text-sm font-semibold mb-1 text-center">
