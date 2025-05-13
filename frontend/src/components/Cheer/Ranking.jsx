@@ -17,13 +17,17 @@ export const Ranking = () => {
   const fetchRanking = async () => {
     const list = await getCandidates();
 
-    const enrichedList = list.map((candidate) => {
-      const match = CANDIDATE_OPTION.find((c) => c.value === candidate.name);
-      return {
-        ...candidate,
-        ...match,
-      };
-    });
+    const excludedNames = ["김재연", "이낙연"];
+
+    const enrichedList = list
+      .filter((candidate) => !excludedNames.includes(candidate.name))
+      .map((candidate) => {
+        const match = CANDIDATE_OPTION.find((c) => c.value === candidate.name);
+        return {
+          ...candidate,
+          ...match,
+        };
+      });
 
     const ranked = enrichedList
       .sort((a, b) => b.cheerCount - a.cheerCount)
