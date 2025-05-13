@@ -9,10 +9,12 @@ export const CategoryScore = ({ categoryScore }) => {
     <div className="w-full space-y-4">
       <h4 className="font-semibold text-center text-[18px]">카테고리별 성향</h4>
       {Object.entries(categoryScore).map(([category, score]) => {
-        const delta = +(score - 5).toFixed(2);
-        const width = (Math.abs(delta) / 5) * 50;
+        const delta = +(score - 3).toFixed(2);
+        const width = (Math.abs(delta) / 2) * 50;
         const barColor = getBarColor(delta);
         const label = delta === 0 ? "중도" : delta;
+
+        console.log(category, score, delta);
 
         return (
           <div key={category} className="space-y-1">

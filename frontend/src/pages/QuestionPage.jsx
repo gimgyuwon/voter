@@ -5,7 +5,7 @@ import { Question } from "../components/question/Question";
 import useAuthStore from "../store/useAuthStore";
 
 const QuestionPage = () => {
-  const { accessToken, setTestResult } = useAuthStore();
+  const { accessToken, setTestResult, user } = useAuthStore();
   const navigate = useNavigate();
 
   const handleSurverySubmit = async (answers) => {
@@ -13,14 +13,16 @@ const QuestionPage = () => {
       const result = await submitSurvey(answers);
 
       // 서버에 결과 저장
-      await fetch(`${process.env.REACT_APP_API_URL}/api/test-result`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(result),
-      });
+      if (user) {
+        await fetch(`${process.env.REACT_APP_API_URL}/api/test-result`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(result),
+        });
+      }
 
       // 전역 상태 저장
       setTestResult(result);
