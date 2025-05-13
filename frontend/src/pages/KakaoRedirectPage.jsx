@@ -51,7 +51,7 @@ export const KakaoRedirectPage = () => {
     }
   }, [navigate, login]);
 
-  return loading ? <Loading /> : null;
+  return loading ? <Loading message="카카오 로그인중" /> : null;
 };
 
 export default KakaoRedirectPage;
