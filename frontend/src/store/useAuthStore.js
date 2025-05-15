@@ -27,7 +27,15 @@ const useAuthStore = create((set, get) => ({
     }),
 
   /** 로그아웃 처리 */
-  logout: () =>
+  logout: () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("nickname");
+    localStorage.removeItem("ideologyScore");
+    localStorage.removeItem("policyMatch");
+    localStorage.removeItem("bookmarks");
+    localStorage.removeItem("theme");
+
     set({
       user: null,
       accessToken: null,
@@ -35,7 +43,8 @@ const useAuthStore = create((set, get) => ({
       bookmarks: [],
       testResult: null,
       theme: null,
-    }),
+    });
+  },
 
   /** 북마크 추가/제거 toggle */
   toggleBookmark: (policyId) =>

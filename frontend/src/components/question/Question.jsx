@@ -8,11 +8,10 @@ import AnswerList from "./AnswerList";
 import Explanation from "./Explanation";
 import ProgressBar from "./ProgressBar";
 
-export const Question = ({ onSubmit }) => {
+export const Question = ({ onSubmit, setLoading, loading }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [alertMsg, setAlertMsg] = useState("");
-  const [loading, setLoading] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
   const currentQuestion = QUESTION_LIST[currentIndex];
 
@@ -46,13 +45,9 @@ export const Question = ({ onSubmit }) => {
       );
       return;
     }
-    // 2s forced loading
-    setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-      onSubmit(answers);
-    }, 3000);
+    setLoading(true);
+    onSubmit(answers);
   };
 
   return (

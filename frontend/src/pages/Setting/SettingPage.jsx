@@ -1,4 +1,3 @@
-import React from "react";
 import getKakaoAuthURL from "../../utils/kakaoAuthUrl";
 import useAuthStore from "../../store/useAuthStore";
 import AlertModal from "../../components/Common/AlertModal/AlertModal";

@@ -13,17 +13,17 @@ function App() {
     const accessToken = localStorage.getItem("access_token");
     const refreshToken = localStorage.getItem("refresh_token");
     const nickname = localStorage.getItem("nickname");
-    const ideology = localStorage.getItem("ideology");
+    const ideologyScore = localStorage.getItem("ideologyScore");
     const policyMatch = localStorage.getItem("policyMatch");
     const bookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
-    const theme = localStorage.getItem("theme" || "green");
+    const theme = localStorage.getItem("theme");
 
     if (accessToken && refreshToken && nickname) {
       login({
         user: { nickname },
         accessToken,
         refreshToken,
-        testResult: { ideology, policyMatch },
+        testResult: { ideologyScore, policyMatch },
         bookmarks,
         theme,
       });
